@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CineMood - Film ve Dizi Önerileri</title>
+    <link rel="stylesheet" href="/CineMood/css/style.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="/CineMood/js/loadAvatar.js"></script>
+    <style>
+      body.dark .card img {
+        filter: brightness(0.6);
+      }
+
+      .scroll-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+      }
+
+      .card {
+        width: 200px;
+        flex: 1 1 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #444;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        background-color: black;
+        color: white;
+      }
+
+      .card img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        background-color: black;
+      }
+
+      .card .info {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+        text-align: center;
+        background-color: black;
+        color: white;
+      }
+
+      .card .info strong {
+        color: #00ff00; /* Yeşil başlık */
+      }
+
+      .card .info em {
+        color: #cccccc; /* Açık gri tarih */
+      }
+
+      .card .info p {
+        color: white;
+      }
+
+      .card .details-btn {
+        display: inline-block;
+        margin-top: 0.5rem;
+        background-color: #00cc66;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .card .details-btn:hover {
+        background-color: #00994d;
+      }
+
+      .favorite-btn {
+        display: inline-block;
+        margin-top: 0.5rem;
+        margin-left: 0.5rem;
+        background-color: #ff4444;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .favorite-btn.active {
+        background-color: #cc0000;
+      }
+
+      .favorite-btn:hover {
+        background-color: #ff6666;
+      }
+
+      .favorite-btn.active:hover {
+        background-color: #cc0000;
+      }
+
+      .loading-message {
+        text-align: center;
+        font-size: 1rem;
+        color: gray;
+        margin-top: 0.5rem;
+      }
+
+      .theme-toggle {
+        margin-top: 5px;
+      }
+
+      .mood-section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mood-display {
+        margin-top: 0.5rem;
+      }
+
+      .btn {
+        background-color: #06d44b;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 10px 0; /* Üst ve alt boşluk eklendi */
+      }
+
+      .btn:hover {
+        background-color: #06d44b;
+      }
+      .logo-link {
+        text-decoration: none; /* Altı çiziliği kaldırır */
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #06d44b; /* Orijinal renk */
+        cursor: pointer;
+      }
+
+      .logo:hover {
+        color: #06d44b; /* Hover sırasında da rengin sabit kalmasını sağlar */
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="animate2.html" class="logo-link">
+        <div class="logo">CineMood</div>
+      </a>
+
+      <div class="nav-profile">
+        <div class="profile-section">
+          <img
+            class="profile-img"
+            src="../CineMood/res/blank-profile-picture-973460_1280.webp"
+            alt="Profil"
+          />
+          <a href="myAccount.html" class="profile-text fw-bold">Profil</a>
+          <a href="/CineMood/recommendations.html" class="profile-text fw-bold"
+            >Öneriler</a
+          >
+
+          <a href="/CineMood/ChooseMode.html" class="profile-text fw-bold"
+            >Modunu Güncelle</a
+          >
+          <a href="#" class="profile-text fw-bold" id="logoutBtn">Çıkış Yap</a>
+        </div>
+        <button id="themeToggle" class="theme-toggle">
+          <i class="ph ph-sun theme-icon light-icon hidden"></i>
+          <i class="ph ph-moon theme-icon dark-icon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="section">
+        <div class="mood-section-header">
+          <h2 class="section-title">Seçtiğiniz Modlar</h2>
+          <a href="#tvSection" class="btn">Dizi Önerilerine Git</a>
+        </div>
+        <div id="selectedMoods" class="mood-display"></div>
+      </div>
+
+      <div class="section" id="movieSection">
+        <h2 class="section-title">Film Önerileri</h2>
+        <div class="scroll-container" id="movieContainer"></div>
+        <div id="movieLoading" class="loading-message">
+          Film önerileri yükleniyor...
+        </div>
+      </div>
+
+      <div class="section" id="tvSection">
+        <h2 class="section-title">Dizi Önerileri</h2>
+        <a href="#movieSection" class="btn" style="margin-left: 1680px"
+          >Film Önerilerine Git</a
+        >
+        <div class="scroll-container" id="tvContainer"></div>
+        <div id="tvLoading" class="loading-message">
+          Dizi önerileri yükleniyor...
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Tema Değiştirici
+      document
+        .getElementById("themeToggle")
+        .addEventListener("click", function () {
+          document.body.classList.toggle("light-mode");
+          const lightIcon = document.querySelector(".light-icon");
+          const darkIcon = document.querySelector(".dark-icon");
+          lightIcon.classList.toggle("hidden");
+          darkIcon.classList.toggle("hidden");
+
+          // Tema tercihini localStorage'a kaydet
+          const isLightMode = document.body.classList.contains("light-mode");
+          localStorage.setItem("theme", isLightMode ? "light" : "dark");
+        });
+
+      // Sayfa yüklendiğinde tema tercihini kontrol et
+      window.addEventListener("load", () => {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "light") {
+          document.body.classList.add("light-mode");
+          const lightIcon = document.querySelector(".light-icon");
+          const darkIcon = document.querySelector(".dark-icon");
+          lightIcon.classList.remove("hidden");
+          darkIcon.classList.add("hidden");
+        }
+      });
+
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          localStorage.clear();
+          window.location.href = "/CineMood/login.html";
+        });
+
+      function createCard(item, type) {
+        const title = type === "movie" ? item.title : item.name;
+        const poster = item.poster_path
+          ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+          : "/CineMood/res/placeholder.png";
+        const date = type === "movie" ? item.release_date : item.first_air_date;
+        const overview = item.overview
+          ? item.overview.slice(0, 100) + "..."
+          : "Açıklama bulunamadı";
+        const detailsUrl = `/CineMood/moviedetails.html?id=${item.id}&type=${type}`;
+
+        return `
+          <div class="card">
+            <img src="${poster}" alt="${title}" />
+            <div class="info">
+              <strong>${title}</strong><br>
+              <em>${date || "Tarih yok"}</em><br>
+              <p>${overview}</p>
+              <div style="display: flex; justify-content: center;">
+                <a href="${detailsUrl}" class="details-btn">Detaylara Git</a>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      function displayRecommendations(data, containerId, type) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = data
+          .map((item) => createCard(item, type))
+          .join("");
+      }
+
+      async function getRecommendations() {
+        const moods = JSON.parse(localStorage.getItem("selectedMoods")) || [];
+        if (!moods.length) return;
+
+        const moodsParam = encodeURIComponent(moods.join(","));
+
+        try {
+          // Paralel API çağrıları
+          const [movieRes, tvRes] = await Promise.all([
+            fetch(
+              `/CineMood/php/get_recommendations.php?moods=${moodsParam}&type=movie&page=1`
+            ),
+            fetch(
+              `/CineMood/php/get_recommendations.php?moods=${moodsParam}&type=tv&page=1`
+            ),
+          ]);
+
+          if (!movieRes.ok || !tvRes.ok) {
+            throw new Error("API yanıtı başarısız");
+          }
+
+          const [movieData, tvData] = await Promise.all([
+            movieRes.json(),
+            tvRes.json(),
+          ]);
+
+          // Yükleme mesajlarını gizle
+          document.getElementById("movieLoading").style.display = "none";
+          document.getElementById("tvLoading").style.display = "none";
+
+          // Sonuçları göster
+          displayRecommendations(
+            movieData.movies || [],
+            "movieContainer",
+            "movie"
+          );
+          displayRecommendations(tvData.tvShows || [], "tvContainer", "tv");
+        } catch (error) {
+          console.error("Öneriler yüklenirken hata oluştu:", error);
+          document.getElementById("movieLoading").textContent =
+            "Film önerileri yüklenirken bir hata oluştu.";
+          document.getElementById("tvLoading").textContent =
+            "Dizi önerileri yüklenirken bir hata oluştu.";
+        }
+      }
+
+      function displaySelectedMoods() {
+        const container = document.getElementById("selectedMoods");
+        const moods = JSON.parse(localStorage.getItem("selectedMoods")) || [];
+        container.innerHTML = moods
+          .map((mood) => `<span class="mood-tag">${mood}</span>`)
+          .join("");
+      }
+
+      displaySelectedMoods();
+      getRecommendations();
+    </script>
+  </body>
+</html>

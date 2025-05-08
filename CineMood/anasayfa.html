@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FilmMood - Ana Sayfa</title>
+    <meta
+      name="description"
+      content="FilmMood ile ruh halinize göre film önerileri alın!"
+    />
+    <link rel="stylesheet" href="/CineMood/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="/CineMood/js/loadAvatar.js"></script>
+    <style>
+      /* ... existing styles ... */
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">FilmMood</div>
+      <div class="nav-links">
+        <a href="/CineMood/anasayfa.html" class="nav-link">Ana Sayfa</a>
+        <a href="/CineMood/listem.html" class="nav-link">Listem</a>
+        <a href="/CineMood/degerlendirmelerim.html" class="nav-link"
+          >Değerlendirmelerim</a
+        >
+        <a href="/CineMood/izlediklerim.html" class="nav-link">İzlediklerim</a>
+        <a href="/CineMood/ChooseMode.html" class="nav-link">Modunu Seç</a>
+        <a href="/CineMood/TestMode.html" class="nav-link">Modunu Test Et</a>
+      </div>
+      <!-- Profil ve Mod Toggle -->
+      <div class="nav-profile">
+        <div class="profile-section">
+          <img
+            class="profile-img"
+            src="C:\Users\Asus\Desktop\images-1.jpeg"
+            alt="Profil"
+          />
+          <span class="profile-text">Hesabım</span>
+        </div>
+        <button id="themeToggle" class="theme-toggle">
+          <i class="ph ph-sun theme-icon light-icon hidden"></i>
+          <i class="ph ph-moon theme-icon dark-icon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Ana içerik -->
+    <main class="main-content">
+      <!-- 0. İzlemeye Kaldığın Yerden Devam Et -->
+      <section class="section">
+        <h2 class="section-title">İzlemeye Kaldığın Yerden Devam Et</h2>
+        <div class="scroll-container">
+          <!-- Film Kartı (Devam Edilen Film) -->
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film1.jpg"
+              class="movie-poster"
+              alt="Film Adı 1"
+            />
+            <h3 class="movie-title">Kaldığın Film: Film Adı 1</h3>
+            <div class="movie-actions">
+              <button class="action-button">Devam Et</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1. Senin İçin Seçtiklerimiz -->
+      <section class="section">
+        <h2 class="section-title">Senin İçin Seçtiklerimiz</h2>
+        <div class="scroll-container">
+          <!-- Film Kartları (Öneriler) -->
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film2.jpg"
+              class="movie-poster"
+              alt="Film Adı 2"
+            />
+            <h3 class="movie-title">Film Adı 2</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film3.jpg"
+              class="movie-poster"
+              alt="Film Adı 3"
+            />
+            <h3 class="movie-title">Film Adı 3</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film2.jpg"
+              class="movie-poster"
+              alt="Film Adı 2"
+            />
+            <h3 class="movie-title">Film Adı 2</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film2.jpg"
+              class="movie-poster"
+              alt="Film Adı 2"
+            />
+            <h3 class="movie-title">Film Adı 2</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film2.jpg"
+              class="movie-poster"
+              alt="Film Adı 2"
+            />
+            <h3 class="movie-title">Film Adı 2</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film2.jpg"
+              class="movie-poster"
+              alt="Film Adı 2"
+            />
+            <h3 class="movie-title">Film Adı 2</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film2.jpg"
+              class="movie-poster"
+              alt="Film Adı 2"
+            />
+            <h3 class="movie-title">Film Adı 2</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film2.jpg"
+              class="movie-poster"
+              alt="Film Adı 2"
+            />
+            <h3 class="movie-title">Film Adı 2</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film2.jpg"
+              class="movie-poster"
+              alt="Film Adı 2"
+            />
+            <h3 class="movie-title">Film Adı 2</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Moduna Göre Öneriler -->
+      <section class="section">
+        <h2 class="section-title">Moduna Göre Öneriler</h2>
+        <div class="scroll-container">
+          <!-- Film Kartları (Mod Önerileri) -->
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film4.jpg"
+              class="movie-poster"
+              alt="Film Adı 4"
+            />
+            <h3 class="movie-title">Film Adı 4</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film5.jpg"
+              class="movie-poster"
+              alt="Film Adı 5"
+            />
+            <h3 class="movie-title">Film Adı 5</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film5.jpg"
+              class="movie-poster"
+              alt="Film Adı 5"
+            />
+            <h3 class="movie-title">Film Adı 5</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film5.jpg"
+              class="movie-poster"
+              alt="Film Adı 5"
+            />
+            <h3 class="movie-title">Film Adı 5</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film5.jpg"
+              class="movie-poster"
+              alt="Film Adı 5"
+            />
+            <h3 class="movie-title">Film Adı 5</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film5.jpg"
+              class="movie-poster"
+              alt="Film Adı 5"
+            />
+            <h3 class="movie-title">Film Adı 5</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film5.jpg"
+              class="movie-poster"
+              alt="Film Adı 5"
+            />
+            <h3 class="movie-title">Film Adı 5</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+          <div class="movie-card">
+            <img
+              src="/CineMood/images/film5.jpg"
+              class="movie-poster"
+              alt="Film Adı 5"
+            />
+            <h3 class="movie-title">Film Adı 5</h3>
+            <div class="movie-actions">
+              <button class="action-button">İzle</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

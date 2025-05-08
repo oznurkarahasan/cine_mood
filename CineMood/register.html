@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modunu Test Et! - Kayıt Ol</title>
+    <meta name="description" content="CineMood hesabı oluşturun" />
+    <link rel="stylesheet" href="/CineMood/css/style.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+      .logo-link {
+        text-decoration: none; /* Altı çiziliği kaldırır */
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #06d44b; /* Orijinal renk */
+        cursor: pointer;
+      }
+
+      .logo:hover {
+        color: #06d44b; /* Hover sırasında da rengin sabit kalmasını sağlar */
+      }
+    </style>
+  </head>
+  <body
+    class="netflix-style"
+    style="
+      background: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
+        no-repeat center center fixed;
+      background-size: cover;
+    "
+  >
+    <!-- Navbar -->
+    <nav class="navbar netflix-nav">
+      <a href="animate3.html" class="logo-link">
+        <div class="logo">CineMood</div>
+      </a>
+      <div class="nav-links">
+        <a href="/CineMood/login.html" class="netflix-button">Oturum Aç</a>
+      </div>
+    </nav>
+
+    <!-- Kayıt Formu -->
+    <div class="form-container netflix-form-container">
+      <div class="form-box netflix-form-box">
+        <h1 class="form-title" style="color: white">Kayıt Ol</h1>
+        <form
+          action="/CineMood/php/register.php"
+          method="POST"
+          id="registerForm"
+          class="form netflix-form"
+          aria-label="Kayıt Formu"
+        >
+          <!-- Ad input -->
+          <div class="input-group netflix-input-group">
+            <input
+              type="text"
+              id="first_name"
+              name="first_name"
+              required
+              placeholder="Ad"
+              class="input-field netflix-input"
+              aria-required="true"
+            />
+          </div>
+
+          <!-- Soyad input -->
+          <div class="input-group netflix-input-group">
+            <input
+              type="text"
+              id="last_name"
+              name="last_name"
+              required
+              placeholder="Soyad"
+              class="input-field netflix-input"
+              aria-required="true"
+            />
+          </div>
+
+          <!-- Email input -->
+          <div class="input-group netflix-input-group">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              required
+              placeholder="E-posta"
+              class="input-field netflix-input"
+              aria-required="true"
+            />
+          </div>
+
+          <!-- Telefon input -->
+          <div class="input-group netflix-input-group">
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              required
+              placeholder="Telefon Numarası"
+              class="input-field netflix-input"
+              aria-required="true"
+              pattern="[0-9]{10}"
+              title="10 haneli telefon numarası giriniz"
+            />
+          </div>
+
+          <!-- Doğum Tarihi input -->
+          <div class="input-group netflix-input-group">
+            <input
+              type="date"
+              id="birth_date"
+              name="birth_date"
+              required
+              class="input-field netflix-input"
+              aria-required="true"
+            />
+          </div>
+
+          <!-- Şifre input -->
+          <div class="input-group netflix-input-group">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              autocomplete="new-password"
+              required
+              placeholder="Şifre"
+              class="input-field netflix-input"
+              aria-required="true"
+              minlength="8"
+            />
+          </div>
+
+          <!-- Şifre Tekrar input -->
+          <div class="input-group netflix-input-group">
+            <input
+              type="password"
+              id="password_confirm"
+              name="password_confirm"
+              autocomplete="new-password"
+              required
+              placeholder="Şifre Tekrar"
+              class="input-field netflix-input"
+              aria-required="true"
+              minlength="8"
+            />
+          </div>
+
+          <!-- Kayıt Ol butonu -->
+          <button type="submit" class="netflix-submit-button">Kayıt Ol</button>
+
+          <!-- Kullanım Koşulları -->
+          <div class="netflix-terms">
+            <p>
+              Kayıt olarak, CineMood'un
+              <a href="/CineMood/terms.html" class="netflix-link"
+                >Kullanım Koşulları</a
+              >'nı kabul etmiş olursunuz.
+            </p>
+          </div>
+        </form>
+
+        <!-- Alt yazı -->
+        <div class="netflix-signup">
+          <p>
+            Zaten hesabınız var mı?
+            <a href="/CineMood/login.html" class="netflix-link">Oturum açın</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

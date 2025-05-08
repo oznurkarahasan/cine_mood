@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hoşgeldiniz Animation</title>
+    <script>
+      // Animasyon tamamlandıktan sonra önceki sayfaya dön
+      setTimeout(function () {
+        window.history.back();
+      }, 7000); // 7 saniye sonra geri dön
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+
+      :root {
+        --number-of-text: 11;
+        --number-of-particle: 12;
+        --mult-num-text: calc(360 / var(--number-of-text));
+        --mult-num-particle: calc(360 / var(--number-of-particle));
+        --width: 40px;
+        --height: 40px;
+      }
+
+      html,
+      body {
+        height: 100vh;
+        width: 100vw;
+      }
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        background: #fff;
+        position: relative;
+        overflow: hidden;
+        font-size: 100%;
+        text-align: center;
+      }
+
+      .criterion {
+        font-size: 1.6rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 0;
+        width: 0;
+        transform: translate(
+          calc(-1 * var(--width) * 5.5),
+          calc(-1 * var(--height) / 2)
+        );
+      }
+
+      /* Background */
+      .background {
+        position: absolute;
+        top: 0;
+        height: 100vh;
+        width: 0;
+        animation: background-animation 2s ease-in-out 4s 1 normal forwards;
+      }
+
+      .background0 {
+        left: 0%;
+        height: 100vh;
+        background-color: hsl(0, 80%, 60%);
+      }
+      .background1 {
+        left: 9.09%;
+        height: 100vh;
+        background-color: hsl(32.7, 80%, 60%);
+      }
+      .background2 {
+        left: 18.18%;
+        height: 100vh;
+        background-color: hsl(65.4, 80%, 60%);
+      }
+      .background3 {
+        left: 27.27%;
+        height: 100vh;
+        background-color: hsl(98.1, 80%, 60%);
+      }
+      .background4 {
+        left: 36.36%;
+        height: 100vh;
+        background-color: hsl(130.8, 80%, 60%);
+      }
+      .background5 {
+        left: 45.45%;
+        height: 100vh;
+        background-color: hsl(163.5, 80%, 60%);
+      }
+      .background6 {
+        left: 54.54%;
+        height: 100vh;
+        background-color: hsl(196.2, 80%, 60%);
+      }
+      .background7 {
+        left: 63.63%;
+        height: 100vh;
+        background-color: hsl(228.9, 80%, 60%);
+      }
+      .background8 {
+        left: 72.72%;
+        height: 100vh;
+        background-color: hsl(261.6, 80%, 60%);
+      }
+      .background9 {
+        left: 81.81%;
+        height: 100vh;
+        background-color: hsl(294.3, 80%, 60%);
+      }
+      .background10 {
+        left: 90.9%;
+        height: 100vh;
+        background-color: hsl(327, 80%, 60%);
+      }
+
+      @keyframes background-animation {
+        0% {
+          width: 0;
+        }
+        50% {
+          width: 9.09%;
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          width: 18.18%;
+        }
+      }
+
+      /* Text */
+      .text {
+        position: absolute;
+        width: var(--width);
+        line-height: var(--height);
+        opacity: 0;
+        overflow: hidden;
+      }
+
+      .text::after {
+        z-index: -1;
+        content: "";
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: var(--height);
+      }
+
+      .text0 {
+        left: -220px;
+        top: 0;
+        animation: text-animation 1s ease-in-out 1s 1 normal forwards,
+          text2-animation 2s ease-in-out 5s 1 normal forwards;
+      }
+      .text1 {
+        left: -180px;
+        top: 0;
+        animation: text-animation 1s ease-in-out 1.1s 1 normal forwards,
+          text2-animation 2s ease-in-out 5s 1 normal forwards;
+      }
+      .text2 {
+        left: -140px;
+        top: 0;
+        animation: text-animation 1s ease-in-out 1.2s 1 normal forwards,
+          text2-animation 2s ease-in-out 5s 1 normal forwards;
+      }
+      .text3 {
+        left: -100px;
+        top: 0;
+        animation: text-animation 1s ease-in-out 1.3s 1 normal forwards,
+          text2-animation 2s ease-in-out 5s 1 normal forwards;
+      }
+      .text4 {
+        left: -60px;
+        top: 0;
+        animation: text-animation 1s ease-in-out 1.4s 1 normal forwards,
+          text2-animation 2s ease-in-out 5s 1 normal forwards;
+      }
+      .text5 {
+        left: -20px;
+        top: 0;
+        animation: text-animation 1s ease-in-out 1.5s 1 normal forwards,
+          text2-animation 2s ease-in-out 5s 1 normal forwards;
+      }
+      .text6 {
+        left: 20px;
+        top: 0;
+        animation: text-animation 1s ease-in-out 1.6s 1 normal forwards,
+          text2-animation 2s ease-in-out 5s 1 normal forwards;
+      }
+      .text7 {
+        left: 60px;
+        top: 0;
+        animation: text-animation 1s ease-in-out 1.7s 1 normal forwards,
+          text2-animation 2s ease-in-out 5s 1 normal forwards;
+      }
+      .text8 {
+        left: 100px;
+        top: 0;
+        animation: text-animation 1s ease-in-out 1.8s 1 normal forwards,
+          text2-animation 2s ease-in-out 5s 1 normal forwards;
+      }
+      .text9 {
+        left: 140px;
+        top: 0;
+        animation: text-animation 1s ease-in-out 1.9s 1 normal forwards,
+          text2-animation 2s ease-in-out 5s 1 normal forwards;
+      }
+      .text10 {
+        left: 180px;
+        top: 0;
+        animation: text-animation 1s ease-in-out 2s 1 normal forwards,
+          text2-animation 2s ease-in-out 5s 1 normal forwards;
+      }
+
+      .text0::after {
+        animation: text-after-animation 2s ease-in-out 3s 1 normal forwards;
+      }
+      .text1::after {
+        animation: text-after-animation 2s ease-in-out 3s 1 normal forwards;
+      }
+      .text2::after {
+        animation: text-after-animation 2s ease-in-out 3s 1 normal forwards;
+      }
+      .text3::after {
+        animation: text-after-animation 2s ease-in-out 3s 1 normal forwards;
+      }
+      .text4::after {
+        animation: text-after-animation 2s ease-in-out 3s 1 normal forwards;
+      }
+      .text5::after {
+        animation: text-after-animation 2s ease-in-out 3s 1 normal forwards;
+      }
+      .text6::after {
+        animation: text-after-animation 2s ease-in-out 3s 1 normal forwards;
+      }
+      .text7::after {
+        animation: text-after-animation 2s ease-in-out 3s 1 normal forwards;
+      }
+      .text8::after {
+        animation: text-after-animation 2s ease-in-out 3s 1 normal forwards;
+      }
+      .text9::after {
+        animation: text-after-animation 2s ease-in-out 3s 1 normal forwards;
+      }
+      .text10::after {
+        animation: text-after-animation 2s ease-in-out 3s 1 normal forwards;
+      }
+
+      @keyframes text-animation {
+        0% {
+          transform: scale(0, 0);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(3, 3);
+        }
+        100% {
+          transform: scale(1, 1);
+          opacity: 1;
+        }
+      }
+
+      @keyframes text-after-animation {
+        0% {
+          width: 0;
+          background-color: hsl(0, 80%, 60%);
+          opacity: 1;
+        }
+        50% {
+          width: var(--width);
+          opacity: 1;
+        }
+        100% {
+          left: var(--width);
+          opacity: 0;
+        }
+      }
+
+      @keyframes text2-animation {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      /* Frame */
+      .frame {
+        position: absolute;
+        width: var(--width);
+        height: var(--height);
+        border-radius: 50%;
+        opacity: 0;
+      }
+
+      .frame0 {
+        left: -220px;
+        top: 0;
+        animation: frame-animation 1s ease-in-out 0s 1 normal forwards;
+        background-color: hsl(0, 80%, 60%);
+      }
+      .frame1 {
+        left: -180px;
+        top: 0;
+        animation: frame-animation 1s ease-in-out 0.1s 1 normal forwards;
+        background-color: hsl(32.7, 80%, 60%);
+      }
+      .frame2 {
+        left: -140px;
+        top: 0;
+        animation: frame-animation 1s ease-in-out 0.2s 1 normal forwards;
+        background-color: hsl(65.4, 80%, 60%);
+      }
+      .frame3 {
+        left: -100px;
+        top: 0;
+        animation: frame-animation 1s ease-in-out 0.3s 1 normal forwards;
+        background-color: hsl(98.1, 80%, 60%);
+      }
+      .frame4 {
+        left: -60px;
+        top: 0;
+        animation: frame-animation 1s ease-in-out 0.4s 1 normal forwards;
+        background-color: hsl(130.8, 80%, 60%);
+      }
+      .frame5 {
+        left: -20px;
+        top: 0;
+        animation: frame-animation 1s ease-in-out 0.5s 1 normal forwards;
+        background-color: hsl(163.5, 80%, 60%);
+      }
+      .frame6 {
+        left: 20px;
+        top: 0;
+        animation: frame-animation 1s ease-in-out 0.6s 1 normal forwards;
+        background-color: hsl(196.2, 80%, 60%);
+      }
+      .frame7 {
+        left: 60px;
+        top: 0;
+        animation: frame-animation 1s ease-in-out 0.7s 1 normal forwards;
+        background-color: hsl(228.9, 80%, 60%);
+      }
+      .frame8 {
+        left: 100px;
+        top: 0;
+        animation: frame-animation 1s ease-in-out 0.8s 1 normal forwards;
+        background-color: hsl(261.6, 80%, 60%);
+      }
+      .frame9 {
+        left: 140px;
+        top: 0;
+        animation: frame-animation 1s ease-in-out 0.9s 1 normal forwards;
+        background-color: hsl(294.3, 80%, 60%);
+      }
+      .frame10 {
+        left: 180px;
+        top: 0;
+        animation: frame-animation 1s ease-in-out 1s 1 normal forwards;
+        background-color: hsl(327, 80%, 60%);
+      }
+
+      @keyframes frame-animation {
+        0% {
+          transform: translateY(-1000px);
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 0;
+        }
+      }
+
+      /* Particle */
+      .particle {
+        position: absolute;
+        width: var(--width);
+        height: var(--height);
+        border-radius: 50%;
+      }
+
+      .particle0-0 {
+        left: -220px;
+        opacity: 0;
+        background-color: hsl(0, 80%, 60%);
+        animation: particle-animation 1s ease-in-out 1s 1 normal forwards;
+      }
+      .particle0-1 {
+        left: -220px;
+        opacity: 0;
+        background-color: hsl(0, 80%, 60%);
+        animation: particle-animation 1s ease-in-out 1s 1 normal forwards;
+      }
+      .particle0-2 {
+        left: -220px;
+        opacity: 0;
+        background-color: hsl(0, 80%, 60%);
+        animation: particle-animation 1s ease-in-out 1s 1 normal forwards;
+      }
+      .particle0-3 {
+        left: -220px;
+        opacity: 0;
+        background-color: hsl(0, 80%, 60%);
+        animation: particle-animation 1s ease-in-out 1s 1 normal forwards;
+      }
+      .particle0-4 {
+        left: -220px;
+        opacity: 0;
+        background-color: hsl(0, 80%, 60%);
+        animation: particle-animation 1s ease-in-out 1s 1 normal forwards;
+      }
+      .particle0-5 {
+        left: -220px;
+        opacity: 0;
+        background-color: hsl(0, 80%, 60%);
+        animation: particle-animation 1s ease-in-out 1s 1 normal forwards;
+      }
+      .particle0-6 {
+        left: -220px;
+        opacity: 0;
+        background-color: hsl(0, 80%, 60%);
+        animation: particle-animation 1s ease-in-out 1s 1 normal forwards;
+      }
+      .particle0-7 {
+        left: -220px;
+        opacity: 0;
+        background-color: hsl(0, 80%, 60%);
+        animation: particle-animation 1s ease-in-out 1s 1 normal forwards;
+      }
+      .particle0-8 {
+        left: -220px;
+        opacity: 0;
+        background-color: hsl(0, 80%, 60%);
+        animation: particle-animation 1s ease-in-out 1s 1 normal forwards;
+      }
+      .particle0-9 {
+        left: -220px;
+        opacity: 0;
+        background-color: hsl(0, 80%, 60%);
+        animation: particle-animation 1s ease-in-out 1s 1 normal forwards;
+      }
+      .particle0-10 {
+        left: -220px;
+        opacity: 0;
+        background-color: hsl(0, 80%, 60%);
+        animation: particle-animation 1s ease-in-out 1s 1 normal forwards;
+      }
+      .particle0-11 {
+        left: -220px;
+        opacity: 0;
+        background-color: hsl(0, 80%, 60%);
+        animation: particle-animation 1s ease-in-out 1s 1 normal forwards;
+      }
+
+      @keyframes particle-animation {
+        0% {
+          left: -220px;
+          top: 0;
+          opacity: 0;
+          transform: scale(1, 1);
+        }
+        100% {
+          left: calc(-220px + random(200) - 100);
+          top: calc(0px + random(200) - 100);
+          opacity: 1;
+          transform: scale(0, 0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background background0"></div>
+    <div class="background background1"></div>
+    <div class="background background2"></div>
+    <div class="background background3"></div>
+    <div class="background background4"></div>
+    <div class="background background5"></div>
+    <div class="background background6"></div>
+    <div class="background background7"></div>
+    <div class="background background8"></div>
+    <div class="background background9"></div>
+    <div class="background background10"></div>
+
+    <div class="criterion">
+      <div class="text text0">H</div>
+      <div class="text text1">O</div>
+      <div class="text text2">Ş</div>
+      <div class="text text3">G</div>
+      <div class="text text4">E</div>
+      <div class="text text5">L</div>
+      <div class="text text6">D</div>
+      <div class="text text7">İ</div>
+      <div class="text text8">N</div>
+      <div class="text text9">İ</div>
+      <div class="text text10">Z</div>
+
+      <div class="frame frame0"></div>
+      <div class="frame frame1"></div>
+      <div class="frame frame2"></div>
+      <div class="frame frame3"></div>
+      <div class="frame frame4"></div>
+      <div class="frame frame5"></div>
+      <div class="frame frame6"></div>
+      <div class="frame frame7"></div>
+      <div class="frame frame8"></div>
+      <div class="frame frame9"></div>
+      <div class="frame frame10"></div>
+
+      <div class="particle particle0-0"></div>
+      <div class="particle particle0-1"></div>
+      <div class="particle particle0-2"></div>
+      <div class="particle particle0-3"></div>
+      <div class="particle particle0-4"></div>
+      <div class="particle particle0-5"></div>
+      <div class="particle particle0-6"></div>
+      <div class="particle particle0-7"></div>
+      <div class="particle particle0-8"></div>
+      <div class="particle particle0-9"></div>
+      <div class="particle particle0-10"></div>
+      <div class="particle particle0-11"></div>
+    </div>
+  </body>
+</html>

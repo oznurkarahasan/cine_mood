@@ -1,0 +1,400 @@
+/* CSS Variables */
+:root {
+  --primary-color: #06d44b;
+  --text-color: #ffffff;
+  --border-color: #333333;
+  --card-bg: #2d3748;
+  --hover-bg: #3a4659;
+  --light-text: #e2e8f0;
+  --dark-text: #464b55;
+  --light-bg: #c3c4bb;
+  --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --card-hover-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", Arial, sans-serif;
+}
+/* Profile Page Styles */
+.profile-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: var(--card-bg);
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.profile-header .profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid var(--primary-color);
+  transition: border-color 0.3s ease;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-info h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+.profile-info p {
+  color: var(--light-text);
+  transition: color 0.3s ease;
+}
+
+.profile-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  transition: border-color 0.3s ease;
+}
+
+.tab-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: none;
+  color: var(--light-text);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.tab-button:hover {
+  color: var(--primary-color);
+}
+
+.tab-button.active {
+  color: var(--primary-color);
+}
+
+.tab-button.active::after {
+  content: "";
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary-color);
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.movie-card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease;
+  box-shadow: var(--card-shadow);
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.movie-info {
+  padding: 1rem;
+}
+
+.movie-info h3 {
+  color: var(--light-text);
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.movie-info p {
+  color: var(--light-text);
+  opacity: 0.8;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.comment-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: var(--card-shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.comment-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.comment-card p {
+  color: var(--light-text);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+.comment-card small {
+  color: var(--light-text);
+  opacity: 0.7;
+  transition: color 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Light Mode Overrides */
+.light-mode .profile-container {
+  color: var(--dark-text);
+}
+
+.light-mode .profile-header {
+  background: var(--light-bg);
+}
+
+.light-mode .profile-info h1 {
+  color: var(--dark-text);
+}
+
+.light-mode .profile-info p {
+  color: var(--dark-text);
+}
+
+.light-mode .tab-button {
+  color: var(--dark-text);
+}
+
+.light-mode .movie-card {
+  background: var(--light-bg);
+}
+
+.light-mode .movie-info h3,
+.light-mode .movie-info p {
+  color: var(--dark-text);
+}
+
+.light-mode .comment-card {
+  background: var(--light-bg);
+}
+
+.light-mode .comment-card h3 {
+  color: var(--dark-text);
+}
+
+.light-mode .comment-card p,
+.light-mode .comment-card small {
+  color: var(--dark-text);
+}
+
+/* Avatar Container */
+.avatar-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.avatar-container .profile-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid var(--primary-color);
+  transition: border-color 0.3s ease;
+}
+
+.change-avatar-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.change-avatar-btn:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Avatar Modal */
+.avatar-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.avatar-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.avatar-modal-content {
+  background: var(--card-bg);
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+  border-radius: 8px;
+  padding: 2rem;
+  position: relative;
+  transform: translateY(-20px);
+  transition: transform 0.3s ease;
+}
+
+.avatar-modal.active .avatar-modal-content {
+  transform: translateY(0);
+}
+
+.avatar-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.avatar-modal-header h2 {
+  color: var(--text-color);
+  font-size: 1.5rem;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+  color: var(--primary-color);
+}
+
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.avatar-option {
+  position: relative;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.avatar-option:hover {
+  transform: scale(1.05);
+}
+
+.avatar-option.selected {
+  border: 3px solid var(--primary-color);
+}
+
+.avatar-option img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+.avatar-modal-footer {
+  text-align: right;
+}
+
+.save-avatar-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.save-avatar-btn:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Light Mode Overrides */
+.light-mode .avatar-modal-content {
+  background: var(--light-bg);
+}
+
+.light-mode .avatar-modal-header h2 {
+  color: var(--dark-text);
+}
+
+.light-mode .close-modal {
+  color: var(--dark-text);
+}
+
+.light-mode .save-avatar-btn {
+  background-color: var(--primary-color);
+  color: white;
+}

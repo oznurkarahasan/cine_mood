@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modunu Test Et! - Doğrulama Kodu</title>
+    <meta name="description" content="CineMood doğrulama kodu" />
+    <link rel="stylesheet" href="/CineMood/css/style.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  </head>
+  <body class="netflix-style">
+    <!-- Navbar -->
+    <nav class="navbar netflix-nav">
+      <div class="logo netflix-logo">CineMood</div>
+      <div class="nav-links">
+        <a href="/CineMood/login.html" class="netflix-button">Oturum Aç</a>
+      </div>
+    </nav>
+
+    <!-- Doğrulama Kodu Formu -->
+    <div class="form-container netflix-form-container">
+      <div class="form-box netflix-form-box">
+        <h1 class="form-title" style="color: white">Doğrulama Kodu</h1>
+        <form
+          action="/CineMood/php/verify-code.php"
+          method="POST"
+          id="verifyCodeForm"
+          class="form netflix-form"
+          aria-label="Doğrulama Kodu Formu"
+        >
+          <!-- Doğrulama Kodu input -->
+          <div class="input-group netflix-input-group">
+            <input
+              type="text"
+              id="verification_code"
+              name="verification_code"
+              required
+              placeholder="6 haneli doğrulama kodunu girin"
+              class="input-field netflix-input"
+              aria-required="true"
+              maxlength="6"
+              pattern="[0-9]{6}"
+              title="6 haneli sayısal kod giriniz"
+            />
+          </div>
+
+          <!-- Doğrula butonu -->
+          <button type="submit" class="netflix-submit-button">Doğrula</button>
+        </form>
+
+        <!-- Alt yazı -->
+        <div class="netflix-signup">
+          <p>
+            <a href="/CineMood/forgot-password.html" class="netflix-link"
+              >Yeni kod gönder</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

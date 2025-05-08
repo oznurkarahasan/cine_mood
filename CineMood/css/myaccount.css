@@ -1,0 +1,128 @@
+.profile-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.profile-box {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 30px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.profile-picture {
+  position: relative;
+}
+
+.profile-picture img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-color);
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-info h2 {
+  font-size: 32px;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.membership-date {
+  color: var(--light-text);
+  font-size: 16px;
+}
+
+.profile-actions {
+  display: grid;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.action-group {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.action-group h3 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.action-form {
+  display: flex;
+  gap: 10px;
+}
+
+.action-form input[type="text"] {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  font-size: 16px;
+}
+
+.action-form input[type="text"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.action-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.update-button {
+  background-color: var(--primary-color);
+  color: #000;
+}
+
+.update-button:hover {
+  background-color: #05b842;
+}
+
+.delete-button {
+  background-color: #dc2626;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #b91c1c;
+}
+
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .action-form {
+    flex-direction: column;
+  }
+
+  .action-button {
+    width: 100%;
+  }
+}

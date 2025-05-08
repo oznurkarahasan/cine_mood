@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modunu Seç! - FilmMood</title>
+    <meta
+      name="description"
+      content="Ruh halinize göre film önerisi almak için modunuzu seçin!"
+    />
+    <link rel="stylesheet" href="/CineMood/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="/CineMood/js/loadAvatar.js"></script>
+
+    <style>
+      .logo-link {
+        text-decoration: none; /* Altı çiziliği kaldırır */
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #06d44b; /* Orijinal renk */
+        cursor: pointer;
+      }
+
+      .logo:hover {
+        color: #06d44b; /* Hover sırasında da rengin sabit kalmasını sağlar */
+      }
+    </style>
+  </head>
+  <body
+    class="netflix-style"
+    style="
+      background: url('https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
+        no-repeat center center fixed;
+      background-size: cover;
+    "
+  >
+    <!-- Navbar -->
+    <nav class="navbar">
+      <a href="animate.html" class="logo-link">
+        <div class="logo">CineMood</div>
+      </a>
+
+      <!-- Profil ve Mod Toggle -->
+      <div class="nav-profile">
+        <div class="profile-section">
+          <img
+            class="profile-img"
+            src="../CineMood/res/blank-profile-picture-973460_1280.webp"
+            alt="Profil"
+          />
+          <a href="myAccount.html" class="profile-text fw-bold">Profil</a>
+          <a href="/CineMood/recommendations.html" class="profile-text fw-bold"
+            >Öneriler</a
+          >
+          <a href="/CineMood/ChooseMode.html" class="profile-text fw-bold"
+            >Modunu Güncelle</a
+          >
+          <a href="#" class="profile-text fw-bold" id="logoutBtn">Çıkış Yap</a>
+        </div>
+        <button id="themeToggle" class="theme-toggle">
+          <i class="ph ph-sun theme-icon light-icon hidden"></i>
+          <i class="ph ph-moon theme-icon dark-icon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Ana içerik -->
+    <div class="form-container">
+      <div class="form-box">
+        <h1 class="netflix-form-title" style="text-align: center">
+          Bugün Nasıl Hissediyorsun?
+        </h1>
+        <form class="form" id="moodSelectForm" onsubmit="sonucGoster(event)">
+          <!-- Duygu Seçenekleri -->
+          <div class="question-group">
+            <div class="grid">
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-smiley"></i></span>
+                <input type="checkbox" name="mood" value="mutlu" id="mutlu" />
+                Mutlu
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-smiley-sad"></i></span>
+                <input type="checkbox" name="mood" value="uzgun" id="uzgun" />
+                Üzgün
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-cloud-fog"></i></span>
+                <input
+                  type="checkbox"
+                  name="mood"
+                  value="kaygili"
+                  id="kaygili"
+                />
+                Kaygılı
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-waves"></i></span>
+                <input
+                  type="checkbox"
+                  name="mood"
+                  value="huzurlu"
+                  id="huzurlu"
+                />
+                Huzurlu
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-clock"></i></span>
+                <input type="checkbox" name="mood" value="bikkın" id="bikkın" />
+                Bıkkın
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-user"></i></span>
+                <input type="checkbox" name="mood" value="yalniz" id="yalniz" />
+                Yalnız
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-fire"></i></span>
+                <input
+                  type="checkbox"
+                  name="mood"
+                  value="heyecanli"
+                  id="heyecanli"
+                />
+                Heyecanlı
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-lightbulb"></i></span>
+                <input
+                  type="checkbox"
+                  name="mood"
+                  value="dusunceli"
+                  id="dusunceli"
+                />
+                Düşünceli
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"
+                  ><i class="ph ph-rocket-launch"></i
+                ></span>
+                <input type="checkbox" name="mood" value="motive" id="motive" />
+                Motive
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-sparkle"></i></span>
+                <input
+                  type="checkbox"
+                  name="mood"
+                  value="yeniliklereAcik"
+                  id="yeniliklereAcik"
+                />
+                Yeniliklere Açık
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"
+                  ><i class="ph ph-person-simple"></i
+                ></span>
+                <input type="checkbox" name="mood" value="yorgun" id="yorgun" />
+                Yorgun
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-confetti"></i></span>
+                <input
+                  type="checkbox"
+                  name="mood"
+                  value="karmasik"
+                  id="karmasik"
+                />
+                Karmaşık
+              </label>
+              <label class="checkbox-label col-span-2">
+                <span class="input-icon"><i class="ph ph-question"></i></span>
+                <input
+                  type="checkbox"
+                  name="mood"
+                  value="bilmiyorum"
+                  id="bilmiyorum"
+                  onclick="toggleCheckboxes(this)"
+                />
+                Bilmiyorum
+              </label>
+            </div>
+          </div>
+
+          <!-- Testi Tamamla Butonu -->
+          <button type="submit" class="netflix-submit-button">
+            Testi Tamamla
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("themeToggle")
+        .addEventListener("click", function () {
+          document.body.classList.toggle("light-mode");
+          const lightIcon = document.querySelector(".light-icon");
+          const darkIcon = document.querySelector(".dark-icon");
+          lightIcon.classList.toggle("hidden");
+          darkIcon.classList.toggle("hidden");
+        });
+      function toggleCheckboxes(bilmiyorumCheckbox) {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        if (bilmiyorumCheckbox.checked) {
+          checkboxes.forEach((checkbox) => {
+            if (checkbox !== bilmiyorumCheckbox) {
+              checkbox.disabled = true;
+              checkbox.checked = false;
+            }
+          });
+        } else {
+          checkboxes.forEach((checkbox) => {
+            checkbox.disabled = false;
+          });
+        }
+      }
+      // Çıkış yapma işlevi
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          // Kullanıcı verilerini temizle
+          localStorage.clear();
+          // Ana sayfaya yönlendir
+          window.location.href = "/CineMood/login.html";
+        });
+
+      function sonucGoster(event) {
+        event.preventDefault();
+
+        // Seçilen modları al
+        const selectedMoods = [];
+        const checkboxes = document.querySelectorAll(
+          'input[name="mood"]:checked'
+        );
+        checkboxes.forEach((checkbox) => {
+          selectedMoods.push(checkbox.value);
+        });
+
+        if (selectedMoods.length === 0) {
+          alert("Lütfen en az bir mod seçin!");
+          return;
+        }
+
+        // Modları localStorage'a kaydet
+        localStorage.setItem("selectedMoods", JSON.stringify(selectedMoods));
+
+        // Recommendations sayfasına yönlendir
+        window.location.href = "/CineMood/recommendations.html";
+      }
+    </script>
+  </body>
+</html>

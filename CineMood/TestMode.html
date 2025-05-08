@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modunu Test Et! - CineMood</title>
+    <meta
+      name="description"
+      content="Ruh halinize göre film önerisi almak için testimizi çözün!"
+    />
+    <link rel="stylesheet" href="/CineMood/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">CineMood</div>
+      <!-- Profil ve Mod Toggle -->
+      <div class="nav-profile">
+        <div class="profile-section">
+          <img
+            class="profile-img"
+            src="../CineMood/res/blank-profile-picture-973460_1280.webp"
+            alt="Profil"
+          />
+          <a href="php/myAccount.php" class="profile-text fw-bold"
+            >Profil</a
+          >
+          <a href="/CineMood/recommendations.html" class="profile-text fw-bold"
+            >Öneriler</a
+          >
+          <a href="/CineMood/ChooseMode.html" class="profile-text fw-bold"
+            >Modunu Güncelle</a
+          >
+        </div>
+        <button id="themeToggle" class="theme-toggle">
+          <i class="ph ph-sun theme-icon light-icon hidden"></i>
+          <i class="ph ph-moon theme-icon dark-icon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Ana içerik -->
+    <div class="form-container">
+      <div class="form-box">
+        <h1 class="form-title">Modunu Test Et!</h1>
+        <form class="form" id="moodTestForm" onsubmit="sonucGoster(event)">
+          <!-- Soru 1 -->
+          <div class="question-group">
+            <h3>1. Bugün nasıl bir gün geçirdin?</h3>
+            <div class="grid">
+              <label class="checkbox-label">
+                <span class="input-icon"
+                  ><i class="ph ph-rocket-launch"></i
+                ></span>
+                <input type="checkbox" name="q1" value="yuksek-tempolu" />
+                Yüksek Tempolu
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-waves"></i></span>
+                <input type="checkbox" name="q1" value="sakin" />
+                Sakin
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-clock"></i></span>
+                <input type="checkbox" name="q1" value="sikici" />
+                Sıkıcı
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-cloud-fog"></i></span>
+                <input type="checkbox" name="q1" value="kaygili" />
+                Kaygılı
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-heart"></i></span>
+                <input type="checkbox" name="q1" value="duygusal" />
+                Duygusal
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-party"></i></span>
+                <input type="checkbox" name="q1" value="eglenceli" />
+                Eğlenceli
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-confetti"></i></span>
+                <input type="checkbox" name="q1" value="karmasik" />
+                Karmaşık
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-sun"></i></span>
+                <input type="checkbox" name="q1" value="yeni-baslangiclar" />
+                Yeni Başlangıçların Olduğu
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-repeat"></i></span>
+                <input type="checkbox" name="q1" value="rutin" />
+                Rutin
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-hammer"></i></span>
+                <input type="checkbox" name="q1" value="zorlu" />
+                Zorlu
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-lightbulb"></i></span>
+                <input type="checkbox" name="q1" value="ogretici-kesif" />
+                Öğretici ve Keşif Dolu
+              </label>
+            </div>
+          </div>
+
+          <!-- Soru 2 -->
+          <div class="question-group">
+            <h3>2. Şu anda yalnız mısın?</h3>
+            <div class="grid">
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-user"></i></span>
+                <input type="checkbox" name="q2" value="yalnizim" />
+                Evet, yalnızım
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-users"></i></span>
+                <input type="checkbox" name="q2" value="hayir" />
+                Hayır
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"
+                  ><i class="ph ph-person-simple"></i
+                ></span>
+                <input type="checkbox" name="q2" value="kalabalik-yalniz" />
+                Kalabalık ama yalnız hissediyorum
+              </label>
+            </div>
+          </div>
+
+          <!-- Soru 3 -->
+          <div class="question-group">
+            <h3>3. Filmi izledikten sonra nasıl hissetmek istersin?</h3>
+            <div class="grid">
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-fire"></i></span>
+                <input type="checkbox" name="q3" value="enerjik" />
+                İçim kıpır kıpır olsun, enerjim yerine gelsin!
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-smiley"></i></span>
+                <input type="checkbox" name="q3" value="keyifli" />
+                Yüzümde bir tebessümle, keyifli bir ruh halinde olmak isterim.
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-moon"></i></span>
+                <input type="checkbox" name="q3" value="sakinlesmek" />
+                Sakinleşmek, biraz kafamı dağıtmak istiyorum.
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-question"></i></span>
+                <input type="checkbox" name="q3" value="merak-uyandiran" />
+                'Ne olacak şimdi?' dedirten bir şey arıyorum.
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-book-open"></i></span>
+                <input type="checkbox" name="q3" value="ogrenmek" />
+                Yeni şeyler öğrenmek istiyorum.
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-heartbeat"></i></span>
+                <input type="checkbox" name="q3" value="duygusal-deneyim" />
+                Duygu dolayım, içsel bir deneyim yaşayayım.
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"
+                  ><i class="ph ph-users-three"></i
+                ></span>
+                <input type="checkbox" name="q3" value="sevdiklerle" />
+                Sevdiklerimle birlikte izleyebileceğim eğlenceli bir şeyler
+                istiyorum.
+              </label>
+              <label class="checkbox-label">
+                <span class="input-icon"><i class="ph ph-house"></i></span>
+                <input type="checkbox" name="q3" value="aileyle" />
+                Ailemle izleyebileceğim bir şey arıyorum.
+              </label>
+            </div>
+          </div>
+
+          <!-- Testi Tamamla Butonu -->
+          <button type="submit" class="netflix-submit-button">
+            Testi Tamamla
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("themeToggle")
+        .addEventListener("click", function () {
+          document.body.classList.toggle("light-mode");
+          const lightIcon = document.querySelector(".light-icon");
+          const darkIcon = document.querySelector(".dark-icon");
+          lightIcon.classList.toggle("hidden");
+          darkIcon.classList.toggle("hidden");
+        });
+      function toggleCheckboxes(bilmiyorumCheckbox) {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        if (bilmiyorumCheckbox.checked) {
+          checkboxes.forEach((checkbox) => {
+            if (checkbox !== bilmiyorumCheckbox) {
+              checkbox.disabled = true;
+              checkbox.checked = false;
+            }
+          });
+        } else {
+          checkboxes.forEach((checkbox) => {
+            checkbox.disabled = false;
+          });
+        }
+      }
+
+      function sonucGoster(event) {
+        event.preventDefault();
+        window.location.href = "/CineMood/recommendations.html";
+      }
+    </script>
+  </body>
+</html>

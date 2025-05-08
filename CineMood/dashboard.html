@@ -1,0 +1,42 @@
+<h2>Modunu Seç</h2>
+<select id="modeSelect">
+  <option disabled selected>Mod Seçiniz</option>
+  <link rel="stylesheet" href="/CineMood/css/style.css" />
+</select>
+
+<div id="movieList"></div>
+
+<script>
+  // Modları çek
+  fetch("php/get_modes.php")
+    .then((res) => res.json())
+    .then((data) => {
+      const select = document.getElementById("modeSelect");
+      data.forEach((mode) => {
+        const opt = document.createElement("option");
+        opt.value = mode.id;
+        opt.textContent = mode.name;
+        select.appendChild(opt);
+      });
+    });
+
+  // Mod seçildiğinde film getir
+  document.getElementById("modeSelect").addEventListener("change", function () {
+    const modeId = this.value;
+    fetch("php/get_movies.php?mode_id=" + modeId)
+      .then((res) => res.json())
+      .then((data) => {
+        const container = document.getElementById("movieList");
+        container.innerHTML = ""; // Eski filmleri sil
+        data.forEach((movie) => {
+          container.innerHTML += `
+          <div>
+            <h3>${movie.title}</h3>
+            <p>${movie.description}</p>
+          </div>
+          <hr>
+        `;
+        });
+      });
+  });
+</script>

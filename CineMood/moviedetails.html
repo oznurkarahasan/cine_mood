@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Film/Dizi Detayları - CineMood</title>
+    <link rel="stylesheet" href="/CineMood/css/style.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="/CineMood/js/loadAvatar.js"></script>
+    <style>
+      .details-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+
+      .back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background-color: #06d44b;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      .back-button:hover {
+        background-color: #06d44b;
+      }
+
+      .media-details {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 2rem;
+        background-color: #1a1a1a;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .poster-section {
+        position: relative;
+      }
+
+      .poster-section img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .content-section {
+        padding: 2rem;
+        color: white;
+      }
+
+      .title-section {
+        margin-bottom: 1.5rem;
+      }
+
+      .title-section h1 {
+        font-size: 2.5rem;
+        margin: 0 0 0.5rem 0;
+        color: #fff;
+      }
+
+      .meta-info {
+        display: flex;
+        gap: 1rem;
+        color: #ccc;
+        margin-bottom: 1rem;
+      }
+
+      .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .overview {
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .detail-item {
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 1rem;
+        border-radius: 4px;
+      }
+
+      .detail-item h3 {
+        color: #00ff66;
+        margin: 0 0 0.5rem 0;
+        font-size: 1rem;
+      }
+
+      .detail-item p {
+        margin: 0;
+        color: #fff;
+      }
+
+      .cast-section {
+        margin-top: 2rem;
+      }
+
+      .cast-section h2 {
+        color: #00ff66;
+        margin-bottom: 1rem;
+      }
+
+      .cast-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+      }
+
+      .cast-card {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .cast-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .cast-info {
+        padding: 0.5rem;
+      }
+
+      .cast-info h3 {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #fff;
+      }
+
+      .cast-info p {
+        margin: 0;
+        font-size: 0.8rem;
+        color: #ccc;
+      }
+
+      .rating-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+      }
+
+      .rating i {
+        color: #ffd700;
+      }
+
+      .favorite-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background-color: #00ff66;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .favorite-btn.active {
+        background-color: #00ff66;
+      }
+
+      .favorite-btn:hover {
+        background-color: #66ff7f;
+      }
+
+      .favorite-btn.active:hover {
+        background-color: #00ff66;
+      }
+
+      @media (max-width: 768px) {
+        .media-details {
+          grid-template-columns: 1fr;
+        }
+
+        .poster-section {
+          max-width: 300px;
+          margin: 0 auto;
+        }
+      }
+
+      body.light-mode .media-details {
+        background-color: #f5f5f5;
+      }
+
+      body.light-mode .content-section {
+        color: #333;
+      }
+
+      body.light-mode .title-section h1 {
+        color: #333;
+      }
+
+      body.light-mode .detail-item {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+
+      body.light-mode .detail-item p {
+        color: #333;
+      }
+
+      body.light-mode .cast-card {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+
+      body.light-mode .cast-info h3 {
+        color: #333;
+      }
+      .logo-link {
+        text-decoration: none; /* Altı çiziliği kaldırır */
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #06d44b; /* Orijinal renk */
+        cursor: pointer;
+      }
+
+      .logo:hover {
+        color: #06d44b; /* Hover sırasında da rengin sabit kalmasını sağlar */
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="animate2.html" class="logo-link">
+        <div class="logo">CineMood</div>
+      </a>
+      <div class="nav-profile">
+        <div class="profile-section">
+          <img
+            class="profile-img"
+            src="../CineMood/res/blank-profile-picture-973460_1280.webp"
+            alt="Profil"
+          />
+          <a href="myAccount.html" class="profile-text fw-bold">Profil</a>
+          <a href="/CineMood/recommendations.html" class="profile-text fw-bold"
+            >Öneriler</a
+          >
+          <a href="/CineMood/ChooseMode.html" class="profile-text fw-bold"
+            >Modunu Güncelle</a
+          >
+          <a href="#" class="profile-text fw-bold" id="logoutBtn">Çıkış Yap</a>
+        </div>
+        <button id="themeToggle" class="theme-toggle">
+          <i class="ph ph-sun theme-icon light-icon hidden"></i>
+          <i class="ph ph-moon theme-icon dark-icon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <div class="details-container">
+      <a href="recommendations.html" class="back-button" id="backButton">
+        <i class="ph ph-arrow-left"></i>
+        Geri Dön
+      </a>
+
+      <div class="media-details">
+        <div class="poster-section">
+          <img id="poster" src="" alt="Poster" />
+        </div>
+        <div class="content-section">
+          <div class="title-section">
+            <h1 id="title"></h1>
+            <div class="meta-info">
+              <span class="meta-item" id="releaseDate"></span>
+              <span class="meta-item" id="runtime"></span>
+              <span class="meta-item" id="genres"></span>
+            </div>
+            <div class="rating-section">
+              <div class="rating">
+                <i class="ph ph-star-fill"></i>
+                <span id="rating"></span>
+              </div>
+              <div class="rating">
+                <i class="ph ph-users"></i>
+                <span id="voteCount"></span> oy
+              </div>
+              <button id="favoriteBtn" class="favorite-btn">
+                <i class="ph ph-heart"></i>
+                <span>Favori Durumu Kontrol Ediliyor...</span>
+              </button>
+              <button id="watchLaterBtn" class="favorite-btn">
+                <i class="ph ph-clock"></i>
+                <span>Daha Sonra İzle Durumu Kontrol Ediliyor...</span>
+              </button>
+              <button id="watchedBtn" class="favorite-btn">
+                <i class="ph ph-check-circle"></i>
+                <span>İzleme Durumu Kontrol Ediliyor...</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="overview">
+            <h2>Özet</h2>
+            <p id="overview"></p>
+          </div>
+
+          <div class="details-grid">
+            <div class="detail-item">
+              <h3>Yapım Şirketi</h3>
+              <p id="productionCompany"></p>
+            </div>
+            <div class="detail-item">
+              <h3>Bütçe</h3>
+              <p id="budget"></p>
+            </div>
+            <div class="detail-item">
+              <h3>Gelir</h3>
+              <p id="revenue"></p>
+            </div>
+            <div class="detail-item">
+              <h3>Dil</h3>
+              <p id="language"></p>
+            </div>
+          </div>
+
+          <div class="cast-section">
+            <h2>Oyuncular</h2>
+            <div class="cast-grid" id="castGrid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Geri dön butonu için önceki sayfaya yönlendirme
+      document
+        .getElementById("backButton")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          if (document.referrer) {
+            // Eğer önceki sayfa varsa, oraya git
+            window.location.href = document.referrer;
+          } else {
+            // Yoksa varsayılan olarak recommendations.html'e git
+            window.location.href = "recommendations.html";
+          }
+        });
+
+      // Tema değiştirme
+      document
+        .getElementById("themeToggle")
+        .addEventListener("click", function () {
+          document.body.classList.toggle("light-mode");
+          const lightIcon = document.querySelector(".light-icon");
+          const darkIcon = document.querySelector(".dark-icon");
+          lightIcon.classList.toggle("hidden");
+          darkIcon.classList.toggle("hidden");
+
+          // Tema tercihini localStorage'a kaydet
+          const isLightMode = document.body.classList.contains("light-mode");
+          localStorage.setItem("theme", isLightMode ? "light" : "dark");
+        });
+
+      // Sayfa yüklendiğinde tema tercihini kontrol et
+      window.addEventListener("load", () => {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "light") {
+          document.body.classList.add("light-mode");
+          const lightIcon = document.querySelector(".light-icon");
+          const darkIcon = document.querySelector(".dark-icon");
+          lightIcon.classList.remove("hidden");
+          darkIcon.classList.add("hidden");
+        }
+      });
+
+      // URL'den ID'yi al
+      const urlParams = new URLSearchParams(window.location.search);
+      const mediaId = parseInt(urlParams.get("id"), 10);
+      const mediaType = urlParams.get("type") || "movie"; // Varsayılan olarak film
+
+      // Favori durumunu kontrol et ve butonu güncelle
+      async function checkFavoriteStatus() {
+        try {
+          const response = await fetch("/CineMood/php/favorites.php");
+          const data = await response.json();
+
+          if (data.error) {
+            throw new Error(data.error);
+          }
+
+          const favoriteBtn = document.getElementById("favoriteBtn");
+          const isFavorite =
+            data.favorites &&
+            data.favorites.some(
+              (fav) =>
+                parseInt(fav.content_id, 10) === mediaId &&
+                fav.content_type === mediaType
+            );
+
+          favoriteBtn.classList.toggle("active", isFavorite);
+          favoriteBtn.querySelector("span").textContent = isFavorite
+            ? "Favorilerden Çıkar"
+            : "Favorilere Ekle";
+        } catch (error) {
+          console.error("Favori durumu kontrol edilirken hata:", error);
+          const favoriteBtn = document.getElementById("favoriteBtn");
+          favoriteBtn.querySelector("span").textContent =
+            "Favori Durumu Yüklenemedi";
+          favoriteBtn.disabled = true;
+        }
+      }
+
+      // Daha sonra izle durumunu kontrol et ve butonu güncelle
+      async function checkWatchLaterStatus() {
+        try {
+          const response = await fetch("/CineMood/php/watch_later.php");
+          const data = await response.json();
+
+          if (data.error) {
+            throw new Error(data.error);
+          }
+
+          const watchLaterBtn = document.getElementById("watchLaterBtn");
+          const isWatchLater =
+            data.watchLater &&
+            data.watchLater.some(
+              (item) =>
+                parseInt(item.content_id, 10) === mediaId &&
+                item.content_type === mediaType
+            );
+
+          watchLaterBtn.classList.toggle("active", isWatchLater);
+          watchLaterBtn.querySelector("span").textContent = isWatchLater
+            ? "Daha Sonra İzle Listesinden Çıkar"
+            : "Daha Sonra İzle";
+        } catch (error) {
+          console.error(
+            "Daha sonra izle durumu kontrol edilirken hata:",
+            error
+          );
+          const watchLaterBtn = document.getElementById("watchLaterBtn");
+          watchLaterBtn.querySelector("span").textContent =
+            "Daha Sonra İzle Durumu Yüklenemedi";
+          watchLaterBtn.disabled = true;
+        }
+      }
+
+      // İzleme durumunu kontrol et ve butonu güncelle
+      async function checkWatchedStatus() {
+        try {
+          const response = await fetch("/CineMood/php/watched.php");
+          const data = await response.json();
+
+          if (data.error) {
+            throw new Error(data.error);
+          }
+
+          const watchedBtn = document.getElementById("watchedBtn");
+          const isWatched =
+            data.watched &&
+            data.watched.some(
+              (item) =>
+                parseInt(item.content_id, 10) === mediaId &&
+                item.content_type === mediaType
+            );
+
+          watchedBtn.classList.toggle("active", isWatched);
+          watchedBtn.querySelector("span").textContent = isWatched
+            ? "İzlemedim"
+            : "İzledim";
+        } catch (error) {
+          console.error("İzleme durumu kontrol edilirken hata:", error);
+          const watchedBtn = document.getElementById("watchedBtn");
+          watchedBtn.querySelector("span").textContent =
+            "İzleme Durumu Yüklenemedi";
+          watchedBtn.disabled = true;
+        }
+      }
+
+      // Detayları yükle
+      async function loadMediaDetails() {
+        try {
+          const response = await fetch(
+            `/CineMood/php/get_media_details.php?id=${mediaId}&type=${mediaType}`
+          );
+          const data = await response.json();
+
+          if (!data.success) {
+            throw new Error(data.error || "Detaylar yüklenemedi");
+          }
+
+          const details = data.details;
+          const credits = data.credits;
+
+          // Temel bilgileri doldur
+          document.title = `${details.title || details.name} - CineMood`;
+          document.getElementById("title").textContent =
+            details.title || details.name;
+          document.getElementById(
+            "poster"
+          ).src = `https://image.tmdb.org/t/p/w500${details.poster_path}`;
+          document.getElementById("poster").alt = details.title || details.name;
+          document.getElementById("overview").textContent =
+            details.overview || "Özet bulunamadı.";
+          document.getElementById("rating").textContent =
+            details.vote_average.toFixed(1);
+          document.getElementById("voteCount").textContent =
+            details.vote_count.toLocaleString();
+
+          // Tarih ve süre
+          const releaseDate =
+            mediaType === "movie"
+              ? details.release_date
+              : details.first_air_date;
+          document.getElementById("releaseDate").textContent = new Date(
+            releaseDate
+          ).toLocaleDateString("tr-TR");
+
+          if (mediaType === "movie") {
+            document.getElementById(
+              "runtime"
+            ).textContent = `${details.runtime} dakika`;
+          }
+
+          // Türler
+          document.getElementById("genres").textContent = details.genres
+            .map((genre) => genre.name)
+            .join(", ");
+
+          // Yapım detayları
+          if (mediaType === "movie") {
+            document.getElementById("budget").textContent = details.budget
+              ? `$${details.budget.toLocaleString()}`
+              : "Bilinmiyor";
+            document.getElementById("revenue").textContent = details.revenue
+              ? `$${details.revenue.toLocaleString()}`
+              : "Bilinmiyor";
+          } else {
+            document.getElementById("budget").parentElement.style.display =
+              "none";
+            document.getElementById("revenue").parentElement.style.display =
+              "none";
+          }
+
+          document.getElementById("language").textContent =
+            details.original_language.toUpperCase();
+
+          const productionCompany =
+            details.production_companies?.[0]?.name || "Bilinmiyor";
+          document.getElementById("productionCompany").textContent =
+            productionCompany;
+
+          // Oyuncular
+          const castGrid = document.getElementById("castGrid");
+          castGrid.innerHTML = credits.cast
+            .slice(0, 6)
+            .map(
+              (actor) => `
+            <div class="cast-card">
+              <img src="https://image.tmdb.org/t/p/w200${actor.profile_path}" alt="${actor.name}" onerror="this.src='/CineMood/res/placeholder.png'">
+              <div class="cast-info">
+                <h3>${actor.name}</h3>
+                <p>${actor.character}</p>
+              </div>
+            </div>
+          `
+            )
+            .join("");
+        } catch (error) {
+          console.error("Detaylar yüklenirken hata oluştu:", error);
+          alert(
+            "Detaylar yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin."
+          );
+        }
+      }
+
+      // Favori ekleme/çıkarma işlemi
+      document
+        .getElementById("favoriteBtn")
+        .addEventListener("click", async function () {
+          try {
+            const title = document.getElementById("title").textContent;
+            const poster = document.getElementById("poster").src;
+
+            const response = await fetch("/CineMood/php/favorites.php", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                content_id: mediaId,
+                content_type: mediaType,
+                title: title,
+                poster_path: poster,
+              }),
+            });
+
+            const data = await response.json();
+
+            if (data.error) {
+              throw new Error(data.error);
+            }
+
+            if (data.status === "added") {
+              this.classList.add("active");
+              this.querySelector("span").textContent = "Favorilerden Çıkar";
+            } else if (data.status === "removed") {
+              this.classList.remove("active");
+              this.querySelector("span").textContent = "Favorilere Ekle";
+            }
+          } catch (error) {
+            console.error("Favori işlemi sırasında hata:", error);
+            alert("Hata: " + error.message);
+          }
+        });
+
+      // Daha sonra izle ekleme/çıkarma işlemi
+      document
+        .getElementById("watchLaterBtn")
+        .addEventListener("click", async function () {
+          try {
+            const title = document.getElementById("title").textContent;
+            const poster = document.getElementById("poster").src;
+
+            const response = await fetch("/CineMood/php/watch_later.php", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                content_id: mediaId,
+                content_type: mediaType,
+                title: title,
+                poster_path: poster,
+              }),
+            });
+
+            const data = await response.json();
+
+            if (data.error) {
+              throw new Error(data.error);
+            }
+
+            if (data.status === "added") {
+              this.classList.add("active");
+              this.querySelector("span").textContent =
+                "Daha Sonra İzle Listesinden Çıkar";
+            } else if (data.status === "removed") {
+              this.classList.remove("active");
+              this.querySelector("span").textContent = "Daha Sonra İzle";
+            }
+          } catch (error) {
+            console.error("Daha sonra izle işlemi sırasında hata:", error);
+            alert("Hata: " + error.message);
+          }
+        });
+
+      // İzleme ekleme/çıkarma işlemi
+      document
+        .getElementById("watchedBtn")
+        .addEventListener("click", async function () {
+          try {
+            const title = document.getElementById("title").textContent;
+            const poster = document.getElementById("poster").src;
+
+            const response = await fetch("/CineMood/php/watched.php", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                content_id: mediaId,
+                content_type: mediaType,
+                title: title,
+                poster_path: poster,
+              }),
+            });
+
+            const data = await response.json();
+
+            if (data.error) {
+              throw new Error(data.error);
+            }
+
+            if (data.status === "added") {
+              this.classList.add("active");
+              this.querySelector("span").textContent = "İzlemedim";
+            } else if (data.status === "removed") {
+              this.classList.remove("active");
+              this.querySelector("span").textContent = "İzledim";
+            }
+          } catch (error) {
+            console.error("İzleme işlemi sırasında hata:", error);
+            alert("Hata: " + error.message);
+          }
+        });
+
+      // Sayfa yüklendiğinde önce favori, daha sonra izle ve izleme durumunu kontrol et, sonra detayları getir
+      document.addEventListener("DOMContentLoaded", async () => {
+        try {
+          // Önce tüm durumları kontrol et
+          await Promise.all([
+            checkFavoriteStatus(),
+            checkWatchLaterStatus(),
+            checkWatchedStatus(),
+          ]);
+          // Sonra detayları yükle
+          await loadMediaDetails();
+        } catch (error) {
+          console.error("Sayfa yüklenirken hata:", error);
+        }
+      });
+
+      // Çıkış yapma işlevi
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          localStorage.clear();
+          window.location.href = "/CineMood/login.html";
+        });
+    </script>
+  </body>
+</html>

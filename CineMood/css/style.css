@@ -1,0 +1,908 @@
+/* CSS Variables */
+:root {
+  --primary-color: #06d44b;
+  --text-color: #ffffff;
+  --border-color: #333333;
+  --card-bg: #2d3748;
+  --hover-bg: #3a4659;
+  --light-text: #e2e8f0;
+  --dark-text: #464b55;
+  --light-bg: #c3c4bb;
+  --body-bg: #000000;
+  --nav-bg: #000000;
+  --nav-text: #06d44b;
+  --nav-link: #ffffff;
+  --nav-link-hover: #06d44b;
+  --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --card-hover-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Light Mode Variables */
+.light-mode {
+  --body-bg: #c3c4bb;
+  --nav-bg: #c3c4bb;
+  --nav-text: #464b55;
+  --nav-link: #464b55;
+  --nav-link-hover: #06d44b;
+  --text-color: #464b55;
+  --card-bg: #edf2f7;
+  --border-color: #e2e8f0;
+  --light-text: #464b55;
+  --dark-text: #464b55;
+}
+
+/* Genel Stil */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", Arial, sans-serif;
+}
+
+body {
+  background-color: var(--body-bg);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--nav-bg);
+  color: var(--nav-text);
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--card-shadow);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.navbar .logo {
+  font-size: 24px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--nav-link);
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--nav-link-hover);
+  text-decoration: underline;
+}
+
+/* Navbar Profil ve Tema Toggle */
+.nav-profile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.profile-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--text-color);
+  transition: border-color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.profile-text {
+  font-size: 16px;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.theme-icon {
+  display: inline-block;
+}
+
+/* Main Content */
+.main-content {
+  padding: 32px 16px;
+  flex-grow: 1;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #e2e8f0;
+}
+
+/* Kaydırma için stil */
+.scroll-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 10px;
+}
+
+/* Film kartlarının boyutları */
+.movie-card,
+.tv-card {
+  display: inline-block;
+  width: 150px;
+  margin-right: 16px;
+  background: #2d3748;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s;
+  vertical-align: top;
+}
+
+/* Kartlar üzerine gelindiğinde büyüme efekti */
+.movie-card:hover,
+.tv-card:hover {
+  transform: scale(1.05);
+}
+
+/* Poster görselleri */
+.movie-poster,
+.tv-poster {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Kaydırıcıyı gizlemek */
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.movie-title,
+.tv-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 8px 0;
+  text-align: center;
+  color: #e2e8f0;
+}
+
+.movie-actions,
+.tv-actions {
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+}
+
+.action-button {
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.action-button:hover {
+  background-color: #2b6cb0;
+}
+
+/* Form Container */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding: 32px 16px;
+}
+
+.form-box {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 32px;
+  width: 100%;
+  max-width: 768px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Login ve Register için max-width'i koruyan bir override */
+.form-box.login-form,
+.form-box.register-form {
+  max-width: 400px;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  position: relative;
+  top: -10px;
+  color: #ffffff;
+}
+
+/* Soru Grupları */
+.question-group {
+  margin-bottom: 32px;
+}
+
+.question-group h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #e2e8f0;
+}
+
+/* Grid Düzeni */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.grid .col-span-2 {
+  grid-column: span 2;
+}
+
+/* Checkbox Stilleri */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  background-color: #949699;
+  border: 1px solid #4a5568;
+  border-radius: 8px;
+  padding: 12px 16px 12px 40px;
+  color: white;
+  font-size: 16px;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.checkbox-label input {
+  margin-right: 12px;
+}
+
+.checkbox-label:hover {
+  background-color: #3a4659;
+}
+
+.checkbox-label .input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #e2e8f0;
+}
+
+/* Input Fields (Kayıt/Giriş için) */
+.input-group {
+  position: relative;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #e2e8f0;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px 40px 12px 40px;
+  background-color: #2d3748;
+  border: 1px solid #4a5568;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 5px rgba(51, 153, 255, 0.5);
+}
+
+.input-field::placeholder {
+  color: #e2e8f0;
+}
+
+/* Options */
+.options {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 14px;
+  color: #e2e8f0;
+  margin-bottom: 16px;
+}
+
+.checkbox {
+  margin-right: 8px;
+}
+
+.terms-link {
+  color: #3182ce;
+  text-decoration: none;
+}
+
+.terms-link:hover {
+  text-decoration: underline;
+}
+
+.forgot-password {
+  color: #3182ce;
+  text-decoration: none;
+  margin-left: 130px;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* Butonlar */
+.login-button,
+.submit-button {
+  display: inline-block;
+  width: 90%;
+  padding: 12px;
+  background-color: #3182ce;
+  color: white;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-top: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.login-button:hover,
+.submit-button:hover {
+  background-color: #2b6cb0;
+}
+
+/* Alt Yazı */
+.signup,
+.signup-text {
+  font-size: 14px;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.signup-link {
+  color: #3182ce;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+/* Başarı Mesajı */
+.message-style {
+  background-color: #000;
+}
+.success-message {
+  background-color: #06d44b;
+  backdrop-filter: blur(10px);
+  padding: 32px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.success-message h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.success-message p {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.success-message a {
+  color: white;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.success-message a:hover {
+  text-decoration: none;
+}
+
+/* Netflix Style */
+.netflix-style {
+  background-color: #000;
+  color: #fff;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.netflix-nav {
+  background-color: transparent;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.netflix-logo {
+  color: #06d44b;
+  font-size: 2rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.netflix-button {
+  background-color: #06d44b;
+  color: #fff;
+  padding: 7px 17px;
+  border-radius: 3px;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.netflix-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 100px);
+  padding: 20px;
+}
+
+.netflix-form-box {
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 4px;
+  padding: 60px 68px 40px;
+  min-width: 380px;
+  max-width: 450px;
+}
+
+.netflix-form-title {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+
+.netflix-input-group {
+  margin-bottom: 16px;
+}
+
+.netflix-input {
+  width: 100%;
+  height: 50px;
+  background-color: #333;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  padding: 16px 20px;
+  font-size: 16px;
+}
+
+.netflix-input:focus {
+  background-color: #454545;
+  outline: none;
+}
+
+.netflix-submit-button {
+  width: 100%;
+  height: 50px;
+  background-color: #06d44b;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 24px;
+  cursor: pointer;
+}
+
+.netflix-submit-button:hover {
+  background-color: #06d44b;
+}
+
+.netflix-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  color: #b3b3b3;
+  font-size: 13px;
+}
+
+.netflix-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.netflix-link {
+  color: #b3b3b3;
+  text-decoration: none;
+}
+
+.netflix-link:hover {
+  text-decoration: underline;
+}
+
+.netflix-signup {
+  margin-top: 60px;
+  color: #737373;
+  font-size: 16px;
+  text-align: center;
+}
+
+.netflix-signup a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.netflix-signup a:hover {
+  text-decoration: underline;
+}
+
+/* Netflix Terms */
+.netflix-terms {
+  margin-top: 16px;
+  color: #737373;
+  font-size: 13px;
+  text-align: center;
+}
+
+.netflix-terms p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.netflix-terms a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.netflix-terms a:hover {
+  text-decoration: underline;
+}
+
+/* Hata ve Başarı Mesajları */
+.netflix-error {
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff0000;
+  color: #ff0000;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.netflix-success {
+  background-color: rgba(0, 255, 0, 0.1);
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* Profile Page Styles */
+.profile-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  color: var(--text-color);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: var(--card-bg);
+  border-radius: 8px;
+}
+
+.profile-header .profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid var(--primary-color);
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-info h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.profile-info p {
+  color: var(--light-text);
+}
+
+.profile-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.tab-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: none;
+  color: var(--light-text);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.tab-button:hover {
+  color: var(--primary-color);
+}
+
+.tab-button.active {
+  color: var(--primary-color);
+}
+
+.tab-button.active::after {
+  content: "";
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary-color);
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.movie-card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.movie-info {
+  padding: 1rem;
+}
+
+.movie-info h3 {
+  color: var(--light-text);
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.movie-info p {
+  color: var(--light-text);
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.comment-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.comment-card p {
+  color: var(--light-text);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.comment-card small {
+  color: var(--light-text);
+  opacity: 0.7;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Light Mode Overrides */
+.light-mode .profile-container {
+  color: var(--dark-text);
+}
+
+.light-mode .profile-header {
+  background: var(--light-bg);
+}
+
+.light-mode .profile-info h1 {
+  color: var(--dark-text);
+}
+
+.light-mode .profile-info p {
+  color: var(--dark-text);
+}
+
+.light-mode .tab-button {
+  color: var(--dark-text);
+}
+
+.light-mode .movie-card {
+  background: var(--light-bg);
+}
+
+.light-mode .movie-info h3,
+.light-mode .movie-info p {
+  color: var(--dark-text);
+}
+
+.light-mode .comment-card {
+  background: var(--light-bg);
+}
+
+.light-mode .comment-card h3 {
+  color: var(--dark-text);
+}
+
+.light-mode .comment-card p,
+.light-mode .comment-card small {
+  color: var(--dark-text);
+}
+.logo-link {
+  text-decoration: none; /* Altı çiziliği kaldırır */
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #06d44b; /* Orijinal renk */
+  cursor: pointer;
+}
+
+.logo:hover {
+  color: #06d44b; /* Hover sırasında da rengin sabit kalmasını sağlar */
+}
+
+/* Responsive styles for navbar */
+@media screen and (max-width: 768px) {
+  .navbar {
+    padding: 12px 16px;
+  }
+
+  .navbar .logo {
+    font-size: 20px;
+  }
+
+  .profile-section {
+    gap: 4px;
+  }
+
+  .profile-text {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar {
+    padding: 8px 12px;
+  }
+
+  .navbar .logo {
+    font-size: 18px;
+  }
+
+  .profile-section {
+    gap: 2px;
+  }
+
+  .profile-text {
+    font-size: 12px;
+  }
+
+  .profile-img {
+    width: 28px;
+    height: 28px;
+  }
+}

@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profil - CineMood</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/profile.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="js/loadAvatar.js"></script>
+    <style>
+      body {
+        background-color: #000;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      body.light-mode {
+        background-color: #f5f5f5;
+        color: #333;
+      }
+
+      .profile-container {
+        padding: 60px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .profile-box {
+        background-color: #1e2a38;
+        border-radius: 20px;
+        padding: 40px 60px;
+        text-align: center;
+        box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+        transition: background-color 0.3s, box-shadow 0.3s;
+      }
+
+      body.light-mode .profile-box {
+        background-color: #ffffff;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .profile-picture img {
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border: 3px solid #00ff66;
+        transition: border-color 0.3s;
+      }
+
+      body.light-mode .profile-picture img {
+        border-color: #333;
+      }
+
+      h2 {
+        margin-top: 15px;
+        color: #00ff66;
+        font-size: 28px;
+        transition: color 0.3s;
+      }
+
+      body.light-mode h2 {
+        color: #333;
+      }
+
+      .membership-date {
+        margin-top: 8px;
+        color: #ccc;
+        font-size: 16px;
+        transition: color 0.3s;
+      }
+
+      body.light-mode .membership-date {
+        color: #666;
+      }
+
+      .actions {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .actions form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .actions input[type="text"] {
+        padding: 10px 15px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        background-color: #2a3a4a;
+        color: white;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      body.light-mode .actions input[type="text"] {
+        background-color: #f0f0f0;
+        color: #333;
+      }
+
+      .actions button {
+        padding: 12px 20px;
+        background-color: #00ff66;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        color: black;
+        font-weight: bold;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+
+      .actions button:hover {
+        background-color: #00e65c;
+      }
+
+      .delete-button {
+        background-color: #ff4444;
+        color: white;
+      }
+
+      .delete-button:hover {
+        background-color: #e63939;
+      }
+
+      /* Avatar Modal Styles */
+      .avatar-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        transition: background-color 0.3s;
+      }
+
+      body.light-mode .avatar-modal {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .avatar-modal.active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .avatar-modal-content {
+        background-color: #1e2a38;
+        border-radius: 20px;
+        padding: 30px;
+        width: 90%;
+        max-width: 600px;
+        transition: background-color 0.3s;
+      }
+
+      body.light-mode .avatar-modal-content {
+        background-color: #ffffff;
+      }
+
+      .avatar-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .avatar-modal-header h2 {
+        color: #00ff66;
+        margin: 0;
+        transition: color 0.3s;
+      }
+
+      body.light-mode .avatar-modal-header h2 {
+        color: #333;
+      }
+
+      .close-modal {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 24px;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+
+      body.light-mode .close-modal {
+        color: #333;
+      }
+
+      .avatar-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .avatar-option {
+        cursor: pointer;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .avatar-option:hover {
+        transform: scale(1.05);
+      }
+
+      .avatar-option.selected {
+        box-shadow: 0 0 0 3px #00ff66;
+      }
+
+      body.light-mode .avatar-option.selected {
+        box-shadow: 0 0 0 3px #333;
+      }
+
+      .avatar-option img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .save-avatar-btn {
+        background-color: #00ff66;
+        color: black;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s;
+      }
+
+      .save-avatar-btn:hover {
+        background-color: #00e65c;
+      }
+
+      @media (min-width: 600px) {
+        .actions {
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .actions form {
+          flex-direction: row;
+          align-items: center;
+        }
+
+        .actions input[type="text"] {
+          margin-right: 10px;
+        }
+      }
+      .logo-link {
+        text-decoration: none; /* Altı çiziliği kaldırır */
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #06d44b; /* Orijinal renk */
+        cursor: pointer;
+      }
+
+      .logo:hover {
+        color: #06d44b; /* Hover sırasında da rengin sabit kalmasını sağlar */
+      }
+
+      .favorites-button {
+        padding: 12px 20px;
+        background-color: #00ff66;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        color: black;
+        font-weight: bold;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+
+      .favorites-button:hover {
+        background-color: #00e65c;
+      }
+
+      .favorites-section {
+        margin-top: 30px;
+        width: 100%;
+        max-width: 1200px;
+      }
+
+      .favorites-section h3 {
+        color: #00ff66;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .favorites-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .favorite-item {
+        background-color: #1e2a38;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s;
+        cursor: pointer;
+      }
+
+      .favorite-item:hover {
+        transform: scale(1.05);
+      }
+
+      .favorite-item img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      .favorite-item-info {
+        padding: 15px;
+      }
+
+      .favorite-item-info h4 {
+        margin: 0;
+        color: #fff;
+        font-size: 16px;
+      }
+
+      .favorite-item-info p {
+        margin: 5px 0 0;
+        color: #ccc;
+        font-size: 14px;
+      }
+
+      body.light-mode .favorite-item {
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      body.light-mode .favorite-item-info h4 {
+        color: #333;
+      }
+
+      body.light-mode .favorite-item-info p {
+        color: #666;
+      }
+    </style>
+  </head>
+  <body
+    class="netflix-style"
+    style="
+      background: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
+        no-repeat center center fixed;
+      background-size: cover;
+    "
+  >
+    <!-- Navbar -->
+    <nav class="navbar">
+      <a href="animate2.html" class="logo-link">
+        <div class="logo">CineMood</div>
+      </a>
+      <!-- Profil ve Mod Toggle -->
+      <div class="nav-profile">
+        <div class="profile-section">
+          <img
+            class="profile-img"
+            src="../CineMood/res/blank-profile-picture-973460_1280.webp"
+            alt="Profil"
+          />
+          <a href="myAccount.html" class="profile-text fw-bold">Profil</a>
+          <a href="recommendations.html" class="profile-text fw-bold"
+            >Öneriler</a
+          >
+          <a href="ChooseMode.html" class="profile-text fw-bold"
+            >Modunu Güncelle</a
+          >
+          <a href="#" class="profile-text fw-bold" id="logoutBtn">Çıkış Yap</a>
+        </div>
+        <button id="themeToggle" class="theme-toggle">
+          <i class="ph ph-sun theme-icon light-icon hidden"></i>
+          <i class="ph ph-moon theme-icon dark-icon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <div class="profile-container">
+      <div class="profile-box">
+        <div class="avatar-container">
+          <img
+            class="profile-img"
+            src="../CineMood/res/blank-profile-picture-973460_1280.webp"
+            alt="Profil"
+            id="currentAvatar"
+          />
+          <button class="change-avatar-btn" id="changeAvatarBtn">
+            <i class="ph ph-camera"></i>
+          </button>
+        </div>
+
+        <h2 id="userName">Kullanıcı</h2>
+        <div class="membership-date" id="membershipDate">Üyelik Tarihi: -</div>
+      </div>
+
+      <div class="actions">
+        <form id="updateNameForm">
+          <input
+            type="text"
+            name="new_name"
+            placeholder="Yeni adınız"
+            required
+          />
+          <button type="submit">Adımı Değiştir</button>
+        </form>
+
+        <button id="showFavoritesBtn" class="favorites-button">
+          Favorilerim
+        </button>
+
+        <button id="showWatchLaterBtn" class="favorites-button">
+          Daha Sonra İzle
+        </button>
+
+        <button id="showWatchedBtn" class="favorites-button">
+          İzlediklerim
+        </button>
+
+        <form
+          action="php/delete_account.php"
+          method="post"
+          id="deleteAccountForm"
+          onsubmit="return confirm('Hesabınızı silmek istediğinize emin misiniz?');"
+        >
+          <button type="submit" class="delete-button">Hesabımı Sil</button>
+        </form>
+      </div>
+
+      <!-- Favoriler Bölümü -->
+      <div
+        class="favorites-section"
+        id="favoritesSection"
+        style="display: none"
+      >
+        <h3>Favorilerim</h3>
+        <div class="favorites-grid" id="favoritesGrid"></div>
+      </div>
+
+      <!-- Daha Sonra İzle Bölümü -->
+      <div
+        class="favorites-section"
+        id="watchLaterSection"
+        style="display: none"
+      >
+        <h3>Daha Sonra İzle</h3>
+        <div class="favorites-grid" id="watchLaterGrid"></div>
+      </div>
+
+      <!-- İzlediklerim Bölümü -->
+      <div class="favorites-section" id="watchedSection" style="display: none">
+        <h3>İzlediklerim</h3>
+        <div class="favorites-grid" id="watchedGrid"></div>
+      </div>
+    </div>
+    <!-- Avatar Seçici Modal -->
+    <div class="avatar-modal" id="avatarModal">
+      <div class="avatar-modal-content">
+        <div class="avatar-modal-header">
+          <h2>Avatar Seç</h2>
+          <button class="close-modal" id="closeModal">
+            <i class="ph ph-x"></i>
+          </button>
+        </div>
+        <div class="avatar-grid">
+          <div class="avatar-option" data-avatar="avatar1.jpg">
+            <img src="../CineMood/res/avatars/avatar1.jpg" alt="Avatar 1" />
+          </div>
+          <div class="avatar-option" data-avatar="avatar2.jpg">
+            <img src="../CineMood/res/avatars/avatar2.jpg" alt="Avatar 2" />
+          </div>
+          <div class="avatar-option" data-avatar="avatar3.jpg">
+            <img src="../CineMood/res/avatars/avatar3.jpg" alt="Avatar 3" />
+          </div>
+          <div class="avatar-option" data-avatar="avatar4.jpg">
+            <img src="../CineMood/res/avatars/avatar4.jpg" alt="Avatar 4" />
+          </div>
+          <div class="avatar-option" data-avatar="avatar5.jpg">
+            <img src="../CineMood/res/avatars/avatar5.jpg" alt="Avatar 5" />
+          </div>
+          <div class="avatar-option" data-avatar="avatar6.jpg">
+            <img src="../CineMood/res/avatars/avatar6.jpg" alt="Avatar 6" />
+          </div>
+        </div>
+        <div class="avatar-modal-footer">
+          <button class="save-avatar-btn" id="saveAvatarBtn">Kaydet</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Tema değiştirme
+      document
+        .getElementById("themeToggle")
+        .addEventListener("click", function () {
+          document.body.classList.toggle("light-mode");
+          const lightIcon = document.querySelector(".light-icon");
+          const darkIcon = document.querySelector(".dark-icon");
+          lightIcon.classList.toggle("hidden");
+          darkIcon.classList.toggle("hidden");
+
+          // Tema tercihini localStorage'a kaydet
+          const isLightMode = document.body.classList.contains("light-mode");
+          localStorage.setItem("theme", isLightMode ? "light" : "dark");
+        });
+
+      // Sayfa yüklendiğinde tema tercihini kontrol et
+      window.addEventListener("load", () => {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "light") {
+          document.body.classList.add("light-mode");
+          const lightIcon = document.querySelector(".light-icon");
+          const darkIcon = document.querySelector(".dark-icon");
+          lightIcon.classList.remove("hidden");
+          darkIcon.classList.add("hidden");
+        }
+      });
+
+      // Çıkış yapma işlevi
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          // Kullanıcı verilerini temizle
+          localStorage.clear();
+          // Ana sayfaya yönlendir
+          window.location.href = "/CineMood/login.html";
+        });
+
+      // Kullanıcı bilgilerini PHP'den al
+      console.log("Kullanıcı bilgileri alınıyor...");
+      fetch("php/myaccount.php", {
+        method: "GET",
+        credentials: "include",
+      })
+        .then((response) => {
+          console.log("Sunucu yanıtı:", response.status);
+          if (!response.ok) {
+            throw new Error("Sunucu hatası: " + response.status);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Alınan veri:", data);
+          if (!data.success) {
+            if (data.error === "Oturum açmanız gerekiyor") {
+              window.location.href = "/CineMood/login.html";
+              return;
+            }
+            console.error("Hata:", data.error);
+            return;
+          }
+          document.getElementById("userName").textContent = data.first_name;
+          document.getElementById("membershipDate").textContent =
+            "Üyelik Tarihi: " + data.created_at;
+
+          // Avatar'ı ayarla
+          const avatarPath = `../CineMood/res/avatars/${data.avatar}`;
+          document.getElementById("currentAvatar").src = avatarPath;
+          document.querySelector(".nav-profile .profile-img").src = avatarPath;
+        })
+        .catch((error) => {
+          console.error("Hata detayı:", error);
+        });
+
+      // Hesap silme işlevi
+      document
+        .getElementById("deleteAccountForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          if (
+            confirm(
+              "Hesabınızı silmek istediğinize emin misiniz? Bu işlem geri alınamaz!"
+            )
+          ) {
+            console.log("Hesap silme isteği gönderiliyor...");
+
+            fetch("php/delete_account.php", {
+              method: "POST",
+              credentials: "include",
+              headers: {
+                Accept: "application/json",
+              },
+            })
+              .then((response) => {
+                console.log("Sunucu yanıtı:", response.status);
+                return response.json();
+              })
+              .then((data) => {
+                console.log("Alınan veri:", data);
+                if (data.success) {
+                  alert(data.message);
+                  window.location.href = "/CineMood/goodbye.html";
+                } else {
+                  alert(data.error || "Hesap silinirken bir hata oluştu.");
+                }
+              })
+              .catch((error) => {
+                console.error("Hata detayı:", error);
+                alert(
+                  "Hesap silinirken bir hata oluştu. Lütfen daha sonra tekrar deneyin."
+                );
+              });
+          }
+        });
+
+      // İsim değiştirme işlevi
+      document
+        .getElementById("updateNameForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const newName = this.querySelector('input[name="new_name"]').value;
+
+          fetch("php/update_name.php", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+              Accept: "application/json",
+            },
+            body: "new_name=" + encodeURIComponent(newName),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                window.location.href = "/CineMood/change_name.html";
+              } else {
+                alert(data.error || "İsim değiştirilirken bir hata oluştu.");
+              }
+            })
+            .catch((error) => {
+              console.error("Hata:", error);
+              alert(
+                "İsim değiştirilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin."
+              );
+            });
+        });
+
+      // Avatar değiştirme
+      const avatarModal = document.getElementById("avatarModal");
+      const changeAvatarBtn = document.getElementById("changeAvatarBtn");
+      const closeModal = document.getElementById("closeModal");
+      const saveAvatarBtn = document.getElementById("saveAvatarBtn");
+      const currentAvatar = document.getElementById("currentAvatar");
+      const avatarOptions = document.querySelectorAll(".avatar-option");
+      let selectedAvatar = null;
+
+      // Sayfa yüklendiğinde kaydedilmiş avatarı yükle
+      window.addEventListener("load", () => {
+        const savedAvatar = localStorage.getItem("userAvatar");
+        if (savedAvatar) {
+          currentAvatar.src = `../CineMood/res/avatars/${savedAvatar}`;
+          document.querySelector(
+            ".nav-profile .profile-img"
+          ).src = `../CineMood/res/avatars/${savedAvatar}`;
+        }
+      });
+
+      // Modal'ı aç
+      changeAvatarBtn.addEventListener("click", () => {
+        avatarModal.classList.add("active");
+      });
+
+      // Modal'ı kapat
+      closeModal.addEventListener("click", () => {
+        avatarModal.classList.remove("active");
+      });
+
+      // Avatar seç
+      avatarOptions.forEach((option) => {
+        option.addEventListener("click", () => {
+          avatarOptions.forEach((opt) => opt.classList.remove("selected"));
+          option.classList.add("selected");
+          selectedAvatar = option.getAttribute("data-avatar");
+        });
+      });
+
+      // Avatar'ı kaydet
+      saveAvatarBtn.addEventListener("click", () => {
+        if (selectedAvatar) {
+          // Avatar'ı veritabanına kaydet
+          fetch("php/update_avatar.php", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({ avatar: selectedAvatar }),
+          })
+            .then((response) => {
+              console.log("Sunucu yanıtı:", response.status);
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log("Alınan veri:", data);
+              if (data.success) {
+                const avatarPath = `../CineMood/res/avatars/${selectedAvatar}`;
+                currentAvatar.src = avatarPath;
+                document.querySelector(".nav-profile .profile-img").src =
+                  avatarPath;
+                avatarModal.classList.remove("active");
+                alert("Avatar başarıyla güncellendi!");
+              } else {
+                throw new Error(
+                  data.error || "Avatar güncellenirken bir hata oluştu."
+                );
+              }
+            })
+            .catch((error) => {
+              console.error("Hata detayı:", error);
+              alert(
+                error.message ||
+                  "Avatar güncellenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin."
+              );
+            });
+        } else {
+          alert("Lütfen bir avatar seçin!");
+        }
+      });
+
+      // Modal dışına tıklandığında kapat
+      window.addEventListener("click", (e) => {
+        if (e.target === avatarModal) {
+          avatarModal.classList.remove("active");
+        }
+      });
+
+      // Daha Sonra İzle gösterme/gizleme
+      document
+        .getElementById("showWatchLaterBtn")
+        .addEventListener("click", function () {
+          const watchLaterSection =
+            document.getElementById("watchLaterSection");
+          const favoritesSection = document.getElementById("favoritesSection");
+          const watchedSection = document.getElementById("watchedSection");
+          if (watchLaterSection.style.display === "none") {
+            watchLaterSection.style.display = "block";
+            favoritesSection.style.display = "none";
+            watchedSection.style.display = "none";
+            loadWatchLater();
+          } else {
+            watchLaterSection.style.display = "none";
+          }
+        });
+
+      // İzlediklerim gösterme/gizleme
+      document
+        .getElementById("showWatchedBtn")
+        .addEventListener("click", function () {
+          const watchedSection = document.getElementById("watchedSection");
+          const favoritesSection = document.getElementById("favoritesSection");
+          const watchLaterSection =
+            document.getElementById("watchLaterSection");
+          if (watchedSection.style.display === "none") {
+            watchedSection.style.display = "block";
+            favoritesSection.style.display = "none";
+            watchLaterSection.style.display = "none";
+            loadWatched();
+          } else {
+            watchedSection.style.display = "none";
+          }
+        });
+
+      // Favorileri gösterme/gizleme
+      document
+        .getElementById("showFavoritesBtn")
+        .addEventListener("click", function () {
+          const favoritesSection = document.getElementById("favoritesSection");
+          const watchLaterSection =
+            document.getElementById("watchLaterSection");
+          const watchedSection = document.getElementById("watchedSection");
+          if (favoritesSection.style.display === "none") {
+            favoritesSection.style.display = "block";
+            watchLaterSection.style.display = "none";
+            watchedSection.style.display = "none";
+            loadFavorites();
+          } else {
+            favoritesSection.style.display = "none";
+          }
+        });
+
+      // Favorileri yükleme
+      function loadFavorites() {
+        fetch("php/favorites.php", {
+          method: "GET",
+          credentials: "include",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            const favoritesGrid = document.getElementById("favoritesGrid");
+            favoritesGrid.innerHTML = "";
+
+            if (data.error) {
+              favoritesGrid.innerHTML = `<p class="error-message">${data.error}</p>`;
+              return;
+            }
+
+            if (!data.favorites || data.favorites.length === 0) {
+              favoritesGrid.innerHTML =
+                '<p class="no-favorites">Henüz favori içeriğiniz bulunmuyor.</p>';
+              return;
+            }
+
+            data.favorites.forEach((favorite) => {
+              const favoriteItem = document.createElement("div");
+              favoriteItem.className = "favorite-item";
+
+              const posterPath = favorite.poster_path
+                ? `https://image.tmdb.org/t/p/w500${favorite.poster_path}`
+                : "../CineMood/res/no-poster.jpg";
+
+              favoriteItem.innerHTML = `
+              <img src="${posterPath}" alt="${favorite.title}">
+              <div class="favorite-item-info">
+                <h4>${favorite.title}</h4>
+                <p>${favorite.content_type === "movie" ? "Film" : "Dizi"}</p>
+              </div>
+            `;
+
+              favoriteItem.addEventListener("click", () => {
+                const url =
+                  favorite.content_type === "movie"
+                    ? `moviedetails.html?id=${favorite.content_id}`
+                    : `tvdetails.html?id=${favorite.content_id}`;
+                window.location.href = url;
+              });
+
+              favoritesGrid.appendChild(favoriteItem);
+            });
+          })
+          .catch((error) => {
+            console.error("Favoriler yüklenirken hata oluştu:", error);
+            document.getElementById("favoritesGrid").innerHTML =
+              '<p class="error-message">Favoriler yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.</p>';
+          });
+      }
+
+      // Daha Sonra İzle listesini yükleme
+      function loadWatchLater() {
+        fetch("php/watch_later.php", {
+          method: "GET",
+          credentials: "include",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            const watchLaterGrid = document.getElementById("watchLaterGrid");
+            watchLaterGrid.innerHTML = "";
+
+            if (data.error) {
+              watchLaterGrid.innerHTML = `<p class="error-message">${data.error}</p>`;
+              return;
+            }
+
+            if (!data.watchLater || data.watchLater.length === 0) {
+              watchLaterGrid.innerHTML =
+                '<p class="no-favorites">Daha sonra izlemek için eklediğiniz içerik bulunmuyor.</p>';
+              return;
+            }
+
+            data.watchLater.forEach((item) => {
+              const watchLaterItem = document.createElement("div");
+              watchLaterItem.className = "favorite-item";
+
+              const posterPath = item.poster_path
+                ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+                : "../CineMood/res/no-poster.jpg";
+
+              watchLaterItem.innerHTML = `
+              <img src="${posterPath}" alt="${item.title}">
+              <div class="favorite-item-info">
+                <h4>${item.title}</h4>
+                <p>${item.content_type === "movie" ? "Film" : "Dizi"}</p>
+              </div>
+            `;
+
+              watchLaterItem.addEventListener("click", () => {
+                const url =
+                  item.content_type === "movie"
+                    ? `moviedetails.html?id=${item.content_id}`
+                    : `tvdetails.html?id=${item.content_id}`;
+                window.location.href = url;
+              });
+
+              watchLaterGrid.appendChild(watchLaterItem);
+            });
+          })
+          .catch((error) => {
+            console.error(
+              "Daha sonra izle listesi yüklenirken hata oluştu:",
+              error
+            );
+            document.getElementById("watchLaterGrid").innerHTML =
+              '<p class="error-message">Daha sonra izle listesi yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.</p>';
+          });
+      }
+
+      // İzlediklerim listesini yükleme
+      function loadWatched() {
+        fetch("php/watched.php", {
+          method: "GET",
+          credentials: "include",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            const watchedGrid = document.getElementById("watchedGrid");
+            watchedGrid.innerHTML = "";
+
+            if (data.error) {
+              watchedGrid.innerHTML = `<p class="error-message">${data.error}</p>`;
+              return;
+            }
+
+            if (!data.watched || data.watched.length === 0) {
+              watchedGrid.innerHTML =
+                '<p class="no-favorites">Henüz izlediğiniz içerik bulunmuyor.</p>';
+              return;
+            }
+
+            data.watched.forEach((item) => {
+              const watchedItem = document.createElement("div");
+              watchedItem.className = "favorite-item";
+
+              const posterPath = item.poster_path
+                ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+                : "../CineMood/res/no-poster.jpg";
+
+              watchedItem.innerHTML = `
+              <img src="${posterPath}" alt="${item.title}">
+              <div class="favorite-item-info">
+                <h4>${item.title}</h4>
+                <p>${item.content_type === "movie" ? "Film" : "Dizi"}</p>
+              </div>
+            `;
+
+              watchedItem.addEventListener("click", () => {
+                const url =
+                  item.content_type === "movie"
+                    ? `moviedetails.html?id=${item.content_id}`
+                    : `tvdetails.html?id=${item.content_id}`;
+                window.location.href = url;
+              });
+
+              watchedGrid.appendChild(watchedItem);
+            });
+          })
+          .catch((error) => {
+            console.error(
+              "İzlediklerim listesi yüklenirken hata oluştu:",
+              error
+            );
+            document.getElementById("watchedGrid").innerHTML =
+              '<p class="error-message">İzlediklerim listesi yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.</p>';
+          });
+      }
+    </script>
+  </body>
+</html>
